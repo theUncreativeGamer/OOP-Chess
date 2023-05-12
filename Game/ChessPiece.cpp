@@ -4,10 +4,11 @@ void ChessPiece::GeneratePossibleMoves()
 {
 }
 
-ChessPiece::ChessPiece(GameBoard* board, const std::string& name)
-	: board(board), type(name)
+ChessPiece::ChessPiece(GameBoard* board, const Vector2i& position, const Team& team, const std::string& name)
+	: board(board), type(name), position(position), team(team)
 {
-	
+	lastUpdateRound = 0;
+	allPossibleMoves.clear();
 }
 
 const std::list<ChessMove>& ChessPiece::GetAllPossibleMoves()
@@ -26,7 +27,7 @@ const Team& ChessPiece::GetTeam()
 	return team;
 }
 
-bool ChessMove::DoSpecialThing(void* param)
+bool ChessMove::DoSpecialThing(void* param = nullptr)
 {
 	return true;
 }

@@ -10,10 +10,13 @@ protected:
 	size_t width;
 	size_t height;
 
+	// This starts from 1.
 	size_t currentRound;
 
-	// A list of game objects on this board. 
-	std::list<ChessPiece> gameObjects;
+	// A list of chess pieces on this board. 
+	std::list<ChessPiece> pieces;
+
+	// A grid of pointers stating the position of each chess pieces.
 	std::vector<std::vector<ChessPiece*>> grid;
 public:
 	GameBoard(const size_t& width = 8, const size_t& height = 8);
@@ -21,7 +24,10 @@ public:
 	const size_t& GetHeight() const;
 	const size_t& GetCurrentRound() const;
 
+	// Returns true if the coordinate is in bounds.
 	bool PositionIsInBounds(Vector2i position) const;
+
+	// Get a pointer to the chess piece on a specific tile in the grid.
 	ChessPiece* GetPiece(Vector2i position);
 };
 

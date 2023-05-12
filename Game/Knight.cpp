@@ -26,3 +26,10 @@ void Knight::GeneratePossibleMoves()
 		}
 	}
 }
+
+Knight::Knight(GameBoard* board, const Vector2i& position, const Team& team)
+	: ChessPiece(board, position, team, "knight")
+{
+}
+
+
