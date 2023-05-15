@@ -2,7 +2,7 @@
 #include "ChessPiece.h"
 #include "Queen.h"
 
-const Vector2i Queen::moveDirs[8]=
+const Vector2i moveDirs[8]=
 {
 	{1,0},
 	{0,-1},

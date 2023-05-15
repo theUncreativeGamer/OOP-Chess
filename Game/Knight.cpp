@@ -1,6 +1,6 @@
 #include "Knight.h"
 
-const Vector2i Knight::moveDirs[8] =
+const Vector2i moveDirs[8] =
 {
 	Vector2i(  1,  2),
 	Vector2i(  2,  1),

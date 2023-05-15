@@ -1,5 +1,5 @@
 #pragma once
-#include "..\ChessPiece.h"
+#include "ChessPiece.h"
 class Pawn :
     public ChessPiece
 {
@@ -13,5 +13,6 @@ protected:
     void GeneratePossibleMoves();
 public:
     Pawn(GameBoard* board, const Vector2i& position, const Team& team);
+    void Promote();
 };
 

@@ -1,11 +1,11 @@
 #include "Bishop.h"
 
-const Vector2i Bishop::moveDirs[4]=
+const Vector2i moveDirs[4]=
 {
-	{1,1},
-	{-1,-1},
-	{1,-1},
-	{-1,1}
+	Vector2i(1,1),
+	Vector2i(-1,-1),
+	Vector2i(1,-1),
+	Vector2i(-1,1)
 };
 void Bishop::GeneratePossibleMoves() {
 	for (int i = 0; i < 4; i++) {
