@@ -27,10 +27,7 @@ const Team& ChessPiece::GetTeam()
 	return team;
 }
 
-const std::string& ChessPiece::GetType()
-{
-	return type;
-}
+
 
 void ChessMove::DoCommonThing(GameBoard& board, const Vector2i& position)
 {

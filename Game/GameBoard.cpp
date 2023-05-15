@@ -33,6 +33,14 @@ bool GameBoard::PositionIsInBounds(const Vector2i& position) const
 	return true;
 }
 
+GameBoard::~GameBoard()
+{
+	for (ChessPiece* p : pieces)
+	{
+		delete p;
+	}
+}
+
 ChessPiece* GameBoard::GetPiece(Vector2i position)
 {
 	if (!PositionIsInBounds(position))
