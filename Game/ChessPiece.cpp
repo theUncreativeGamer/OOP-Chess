@@ -27,7 +27,16 @@ const Team& ChessPiece::GetTeam()
 	return team;
 }
 
-bool ChessMove::DoSpecialThing(void* param = nullptr)
+void ChessMove::DoCommonThing(GameBoard& board, const Vector2i& position)
+{
+	ChessPiece* piece = board.GetPiece(position);
+	if (piece == nullptr)
+		throw(std::invalid_argument("Something is wrong with the \"position\" parameter."));
+	piece->isMoved = true;
+	board.eppp = { -1,-1 };
+}
+
+bool ChessMove::DoSpecialThing(GameBoard& board, const Vector2i& position, void* param = nullptr)
 {
 	return true;
 }

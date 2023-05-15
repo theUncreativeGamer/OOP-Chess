@@ -19,6 +19,14 @@ protected:
 
 	// A grid of pointers stating the position of each chess pieces.
 	std::vector<std::vector<ChessPiece*>> grid;
+
+	// En Passent-able Pawn's Position. 可以被「吃過路兵」規則解決掉的小兵的位置。
+	// 如果此值為非法值則代表沒有棋子可以被「吃過路兵」規則解決掉。
+	Vector2i eppp = { -1,-1 };
+
+	// How many moves both players have made since the last pawn advance or piece capture.
+	// Important for determining of draw.
+	size_t halfmoveClock = 0;
 public:
 	GameBoard(const size_t& width = 8, const size_t& height = 8);
 	const size_t& GetWidth() const;

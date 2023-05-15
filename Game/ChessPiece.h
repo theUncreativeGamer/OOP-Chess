@@ -3,6 +3,7 @@
 #include "Vector2i.h"
 #include <string>
 #include <list>
+#include <stdexcept>
 
 enum Team
 {
@@ -16,9 +17,12 @@ struct ChessMove
 	// The absolute coordinate of the destination the chess piece is moving into.
 	Vector2i destination;
 
+	// Things that are applied during every chess move.
+	void DoCommonThing(GameBoard& board, const Vector2i& position);
+
 	// Please override this function if the chess piece does something special after moving.
 	// For example, en passent, promotion and castling.
-	virtual bool DoSpecialThing(void* param = nullptr);
+	virtual bool DoSpecialThing(GameBoard& board, const Vector2i& position, void* param = nullptr);
 
 	ChessMove(Vector2i destination);
 };
@@ -26,6 +30,8 @@ struct ChessMove
 class ChessPiece
 {
 protected:
+	friend ChessMove;
+
 	// Pointer to the board this object is on.
 	GameBoard* board;
 
@@ -43,6 +49,9 @@ protected:
 
 	// Every viable move this chess piece can make in the current round.
 	std::list<ChessMove> allPossibleMoves;
+
+	// True if this piece is moved. Important for pawns' first move and castling.
+	bool isMoved = false;
 
 	// Please override this function.
 	// This function finds every possible move the chess piece could make and store them in allPossibleMoves.
