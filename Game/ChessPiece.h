@@ -63,8 +63,5 @@ public:
 	Vector2i getPosition() {
 		return position;
 	}
-	
-	bool Move(ChessPiece* chess, Vector2i destination, std::list<Vector2i>& validPos);
-
 };
 
