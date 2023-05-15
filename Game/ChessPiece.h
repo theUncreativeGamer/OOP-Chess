@@ -69,6 +69,13 @@ public:
 
 	// The team this object is on.
 	const Team& GetTeam();
-
+	
+	void setPosition(Vector2i pos) {
+		this->position = pos;
+	}
+	
+	Vector2i getPosition() {
+		return position;
+	}
 };
 
