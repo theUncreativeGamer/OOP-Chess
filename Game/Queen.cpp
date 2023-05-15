@@ -35,7 +35,14 @@ void Queen::GeneratePossibleMoves() {
 }
 
 Queen::Queen(GameBoard* board, const Vector2i& position, const Team& team) :
-	ChessPiece(board, position, team, "Queen")
+	ChessPiece(board, position, team)
 {
+}
+
+const std::string Queen::type = "Queen";
+
+const std::string& Queen::GetType()
+{
+	return type;
 }
 

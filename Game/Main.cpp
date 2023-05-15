@@ -1,5 +1,5 @@
 #include "GameBoard.h"
-#include "ChessPiece.h"
+#include "EveryChessPiece.h"
 #include <iostream>
 
 void main()

@@ -28,8 +28,15 @@ void King::GeneratePossibleMoves()
 }
 
 King::King(GameBoard* board, const Vector2i& position, const Team& team)
-	: ChessPiece(board, position, team, "king")
+	: ChessPiece(board, position, team)
 {
+}
+
+const std::string King::type = "King";
+
+const std::string& King::GetType()
+{
+	return type;
 }
 
 

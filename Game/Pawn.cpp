@@ -73,8 +73,15 @@ void Pawn::Promote()
 }
 
 Pawn::Pawn(GameBoard* board, const Vector2i& position, const Team& team)
-	: ChessPiece(board, position, team, "Pawn")
+	: ChessPiece(board, position, team)
 {
+}
+
+const std::string Pawn::type = "Pawn";
+
+const std::string& Pawn::GetType()
+{
+	// TODO: 於此處插入 return 陳述式
 }
 
 

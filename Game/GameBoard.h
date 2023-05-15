@@ -1,6 +1,6 @@
 #pragma once
 #include "Vector2i.h"
-#include "ChessPiece.h"
+#include "EveryChessPiece.h"
 #include <memory>
 #include <list>
 #include <vector>

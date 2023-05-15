@@ -1,5 +1,5 @@
 #pragma once
-#include "..\ChessPiece.h"
+#include "ChessPiece.h"
 class Pawn :
     public ChessPiece
 {
@@ -9,9 +9,11 @@ protected:
         Vector2i(0,  1),
         Vector2i(0,  -1),
     };
+    static const std::string type;
     bool hasMoved = false; 
     void GeneratePossibleMoves();
 public:
     Pawn(GameBoard* board, const Vector2i& position, const Team& team);
+    const std::string& GetType();
 };
 
