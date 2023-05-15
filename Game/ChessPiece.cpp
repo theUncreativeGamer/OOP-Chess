@@ -36,9 +36,13 @@ void ChessMove::DoCommonThing(GameBoard& board, const Vector2i& position)
 	board.eppp = { -1,-1 };
 }
 
-bool ChessMove::DoSpecialThing(GameBoard& board, const Vector2i& position, void* param = nullptr)
+bool ChessMove::DoSpecialThing(GameBoard& board, const Vector2i& position, void* param)
 {
 	return true;
+}
+
+ChessMove::ChessMove() : destination(-1,-1)
+{
 }
 
 ChessMove::ChessMove(Vector2i destination) : destination(destination)

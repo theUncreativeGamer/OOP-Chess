@@ -5,6 +5,8 @@
 #include <list>
 #include <stdexcept>
 
+class GameBoard;
+
 enum Team
 {
 	White,
@@ -24,13 +26,16 @@ struct ChessMove
 	// For example, en passent, promotion and castling.
 	virtual bool DoSpecialThing(GameBoard& board, const Vector2i& position, void* param = nullptr);
 
+	ChessMove();
 	ChessMove(Vector2i destination);
+	~ChessMove() = default;
 };
 
 class ChessPiece
 {
 protected:
-	friend ChessMove;
+	friend struct ChessMove;
+	friend bool LoadBoard(GameBoard& board, const std::string& fen);
 
 	// Pointer to the board this object is on.
 	GameBoard* board;

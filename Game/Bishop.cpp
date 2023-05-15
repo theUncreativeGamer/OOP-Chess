@@ -1,6 +1,6 @@
 #include "Bishop.h"
 
-const Vector2i moveDirs[4]=
+const Vector2i Bishop::moveDirs[4]=
 {
 	{1,1},
 	{-1,-1},

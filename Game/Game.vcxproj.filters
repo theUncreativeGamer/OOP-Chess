@@ -27,6 +27,24 @@
     <ClCompile Include="Knight.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
+    <ClCompile Include="Bishop.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="Castle.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="King.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="Queen.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadBoard.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameBoard.h">
@@ -39,6 +57,18 @@
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="Knight.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Bishop.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Castle.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="King.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Queen.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>

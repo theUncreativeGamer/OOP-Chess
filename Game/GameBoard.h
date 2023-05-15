@@ -1,12 +1,18 @@
 #pragma once
+#include "Vector2i.h"
 #include "ChessPiece.h"
 #include <memory>
 #include <list>
 #include <vector>
+#include <string>
+
+class ChessPiece;
+
 class GameBoard
 {
 protected:
-	friend ChessMove;
+	friend struct ChessMove;
+	friend bool LoadBoard(GameBoard& board, const std::string& fen);
 
 	size_t width;
 	size_t height;
@@ -22,7 +28,7 @@ protected:
 
 	// En Passent-able Pawn's Position. 可以被「吃過路兵」規則解決掉的小兵的位置。
 	// 如果此值為非法值則代表沒有棋子可以被「吃過路兵」規則解決掉。
-	Vector2i eppp = { -1,-1 };
+	Vector2i eppp;
 
 	// How many moves both players have made since the last pawn advance or piece capture.
 	// Important for determining of draw.
@@ -34,7 +40,7 @@ public:
 	const size_t& GetCurrentRound() const;
 
 	// Returns true if the coordinate is in bounds.
-	bool PositionIsInBounds(Vector2i position) const;
+	bool PositionIsInBounds(const Vector2i& position) const;
 
 	// Get a pointer to the chess piece on a specific tile in the grid.
 	ChessPiece* GetPiece(Vector2i position);
@@ -42,5 +48,6 @@ public:
 	// Get a read-only pointer to the chess piece on a specific tile in the grid.
 	const ChessPiece* GetPiece(Vector2i position) const;
 
+	
 };
 
