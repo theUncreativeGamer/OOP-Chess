@@ -55,6 +55,16 @@ public:
 
 	// The team this object is on.
 	const Team& GetTeam();
+	
+	void setPosition(Vector2i pos) {
+		this->position = pos;
+	}
+	
+	Vector2i getPosition() {
+		return position;
+	}
+	
+	bool Move(ChessPiece* chess, Vector2i destination, std::list<Vector2i>& validPos);
 
 };
 
