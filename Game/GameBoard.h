@@ -6,6 +6,7 @@
 class GameBoard
 {
 protected:
+	friend ChessMove;
 
 	size_t width;
 	size_t height;
@@ -29,5 +30,9 @@ public:
 
 	// Get a pointer to the chess piece on a specific tile in the grid.
 	ChessPiece* GetPiece(Vector2i position);
+
+	// Get a read-only pointer to the chess piece on a specific tile in the grid.
+	const ChessPiece* GetPiece(Vector2i position) const;
+
 };
 

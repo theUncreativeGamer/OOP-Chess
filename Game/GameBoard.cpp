@@ -1,5 +1,16 @@
 #include "GameBoard.h"
 
+GameBoard::GameBoard(const size_t& width, const size_t& height)
+	: width(width), height(height), currentRound(1)
+{
+	pieces.clear();
+	grid.resize(height);
+	for (std::vector<ChessPiece*> vec : grid)
+	{
+		vec.resize(width);
+	}
+}
+
 const size_t& GameBoard::GetWidth() const
 {
 	return width;
@@ -28,3 +39,11 @@ ChessPiece* GameBoard::GetPiece(Vector2i position)
 		return nullptr;
 	return grid[position.y][position.x];
 }
+
+const ChessPiece* GameBoard::GetPiece(Vector2i position) const
+{
+	if (!PositionIsInBounds(position))
+		return nullptr;
+	return grid[position.y][position.x];
+}
+
