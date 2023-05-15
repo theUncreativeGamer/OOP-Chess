@@ -10,6 +10,7 @@ protected:
         Vector2i(0,  -1),
     };
     void GeneratePossibleMoves();
+    bool cenBePromote = false;
 public:
     Pawn(GameBoard* board, const Vector2i& position, const Team& team);
     void Promote();

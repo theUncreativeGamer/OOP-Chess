@@ -141,6 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bishop.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Rook.h" />
     <ClInclude Include="GameBoard.h" />
     <ClInclude Include="ChessPiece.h" />

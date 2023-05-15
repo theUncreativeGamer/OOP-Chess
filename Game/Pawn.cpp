@@ -17,7 +17,7 @@ void Pawn::GeneratePossibleMoves()
 				allPossibleMoves.push_back(ChessMove(destination));
 			}
 		}
-		if (!hasMoved) // 還沒動過，可走兩格
+		if (!isMoved) // 還沒動過，可走兩格
 		{
 			destination = position + moveDirs[0] * 2;
 			if (board->PositionIsInBounds(destination)) {
@@ -39,7 +39,7 @@ void Pawn::GeneratePossibleMoves()
 				allPossibleMoves.push_back(ChessMove(destination));
 			}
 		}
-		if (!hasMoved) // 還沒動過，可走兩格
+		if (!isMoved) // 還沒動過，可走兩格
 		{
 			destination = position + moveDirs[1] * 2;
 			if (board->PositionIsInBounds(destination)) {
