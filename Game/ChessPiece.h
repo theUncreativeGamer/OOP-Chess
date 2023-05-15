@@ -1,6 +1,5 @@
 #pragma once
 #include "GameBoard.h"
-#include "EveryChessPiece.h"
 #include "Vector2i.h"
 #include <string>
 #include <list>

@@ -52,6 +52,8 @@ void Pawn::GeneratePossibleMoves()
 		}
 	}
 }
+
+/*
 void Pawn::Promote()
 {
 	std::cout << "選擇要升變成的棋子:\n1.皇后\n2.主教\n3.城堡\n4.騎士" << std::endl;
@@ -71,6 +73,8 @@ void Pawn::Promote()
 	}
 	delete this;
 }
+*/
+
 
 Pawn::Pawn(GameBoard* board, const Vector2i& position, const Team& team)
 	: ChessPiece(board, position, team)
@@ -81,7 +85,7 @@ const std::string Pawn::type = "Pawn";
 
 const std::string& Pawn::GetType()
 {
-	// TODO: 於此處插入 return 陳述式
+	return type;
 }
 
 
