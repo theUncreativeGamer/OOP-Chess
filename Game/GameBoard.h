@@ -1,4 +1,3 @@
-#pragma once
 #include "Vector2i.h"
 #include "ChessPiece.h"
 #include <memory>
