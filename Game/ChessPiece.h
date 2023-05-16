@@ -82,5 +82,8 @@ public:
 		return team;
 	}
 
+	void setTeam(Team t) {
+		team = t;
+	}
 };
 
