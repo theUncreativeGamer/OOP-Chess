@@ -8,9 +8,12 @@
 #include "King.h"
 #include <iostream>
 
-void main()
+const std::string defaultFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
+int main()
 {
 	GameBoard board;
-	//board.AddPiece(Knight::type, { 0,0 }, Team::White);
-	//board.RemovePiece({ 0,0 });
+	board.AddPiece(Knight::type, { 0,0 }, Team::White);
+	board.RemovePiece({ 0,0 });
+	LoadBoard(board, defaultFEN);
 }

@@ -9,7 +9,7 @@
 #include <iostream>
 
 GameBoard::GameBoard(const size_t& width, const size_t& height)
-	: width(width), height(height), currentRound(1), eppp(-1,-1)
+	: width(width), height(height), currentRound(1), eppp(-1,-1), currentPlayer(Team::White)
 {
 	pieces.clear();
 	grid.resize(height);
@@ -58,7 +58,7 @@ ChessPiece* GameBoard::GetPiece(Vector2i position)
 	return grid[position.y][position.x];
 }
 
-/*ChessPiece* GameBoard::AddPiece(const std::string& type, const Vector2i& position, const Team& team)
+ChessPiece* GameBoard::AddPiece(const std::string& type, const Vector2i& position, const Team& team)
 {
 	if (GetPiece(position) != nullptr)
 		return nullptr;
@@ -94,7 +94,7 @@ ChessPiece* GameBoard::GetPiece(Vector2i position)
 
 	grid[position.y][position.x] = pieces.back();
 	return pieces.back();
-}*/
+}
 
 bool GameBoard::RemovePiece(const Vector2i& position)
 {

@@ -33,6 +33,8 @@ protected:
 	// How many moves both players have made since the last pawn advance or piece capture.
 	// Important for determining of draw.
 	size_t halfmoveClock = 0;
+
+	Team currentPlayer;
 public:
 	GameBoard(const size_t& width = 8, const size_t& height = 8);
 	~GameBoard();
