@@ -1,6 +1,7 @@
 #pragma once
 #include<iostream>
 #include<vector>
+#include<string>
 #include "ChessPiece.h"
 #include "King.h"
 #include "Queen.h"
@@ -9,12 +10,12 @@
 #include"Rook.h"
 #include"Pawn.h"
 #include "GameBoard.h"
-
+using namespace std;
 enum Team;
 
 class Player {
 public:
-	int team;
+	Team team;
 	King K;
 	Queen Q;
 	Bishop H[2];
@@ -24,7 +25,7 @@ public:
 
 	Player(Team T) {
 		team = T;
-		if (T) {
+		if (T==Black) {
 			int Y1 = 0, Y2 = 1;
 			K.setPosition(Vector2i(4, Y1));
 			K.setTeam(T);
@@ -71,8 +72,11 @@ public:
 			}
 		}
 	}
-	void MoveChess() {
-
+	void MoveChess(string Type,Vector2i from,Vector2i to) {
+		if (Type == "King") {
+			K.GetAllPossibleMoves();
+			
+		}
 	}
 	void castling() {
 
