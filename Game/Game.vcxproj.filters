@@ -80,8 +80,5 @@
     <ClInclude Include="Player.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="ViewManager.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
