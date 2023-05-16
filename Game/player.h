@@ -1,6 +1,7 @@
 #pragma once
 #include<iostream>
 #include<vector>
+#include<string>
 #include "ChessPiece.h"
 #include "King.h"
 #include "Queen.h"
@@ -9,7 +10,7 @@
 #include"Rook.h"
 #include"Pawn.h"
 #include "GameBoard.h"
-
+using namespace std;
 enum Team;
 
 class Player {
@@ -71,8 +72,11 @@ public:
 			}
 		}
 	}
-	void MoveChess() {
-
+	void MoveChess(string Type,Vector2i from,Vector2i to) {
+		if (Type == "King") {
+			K.GetAllPossibleMoves();
+			
+		}
 	}
 	void castling() {
 
