@@ -5,10 +5,10 @@
 #include "ChessPiece.h"
 #include "King.h"
 #include "Queen.h"
-#include "Bishop.h"
-#include "Knight.h"
-#include "Rook.h"
-#include "Pawn.h"
+#include"Bishop.h"
+#include"Knight.h"
+#include"Rook.h"
+#include"Pawn.h"
 #include "GameBoard.h"
 using namespace std;
 enum Team;

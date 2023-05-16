@@ -77,10 +77,5 @@ public:
 	Vector2i getPosition() {
 		return position;
 	}
-
-	Team getTeam() {
-		return team;
-	}
-
 };
 
