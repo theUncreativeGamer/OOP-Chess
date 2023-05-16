@@ -29,8 +29,8 @@ void Rook::GeneratePossibleMoves()
 	}
 }
 
-Rook::Rook(const Vector2i& position, const Team& team)
-	: ChessPiece(position, team)
+Rook::Rook(GameBoard* board, const Vector2i& position, const Team& team)
+	: ChessPiece(board, position, team)
 {
 }
 

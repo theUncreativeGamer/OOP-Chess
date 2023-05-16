@@ -76,8 +76,8 @@ void Pawn::Promote()
 */
 
 
-Pawn::Pawn(const Vector2i& position, const Team& team)
-	: ChessPiece(position, team)
+Pawn::Pawn(GameBoard* board, const Vector2i& position, const Team& team)
+	: ChessPiece(board, position, team)
 {
 }
 

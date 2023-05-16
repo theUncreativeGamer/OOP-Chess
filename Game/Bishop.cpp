@@ -28,8 +28,8 @@ void Bishop::GeneratePossibleMoves() {
 	}
 }
 
-Bishop::Bishop(const Vector2i& position, const Team& team) :
-	ChessPiece(position, team)
+Bishop::Bishop(GameBoard* board, const Vector2i& position, const Team& team) :
+	ChessPiece(board, position, team)
 {
 }
 

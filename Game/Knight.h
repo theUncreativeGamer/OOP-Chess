@@ -8,8 +8,7 @@ protected:
     void GeneratePossibleMoves();
 public:
     static const std::string type;
-    Knight() {};
-    Knight(const Vector2i& position, const Team& team);
+    Knight(GameBoard* board, const Vector2i& position, const Team& team);
     const std::string& GetType();
 };
 

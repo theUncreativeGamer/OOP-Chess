@@ -4,8 +4,8 @@ void ChessPiece::GeneratePossibleMoves()
 {
 }
 
-ChessPiece::ChessPiece(const Vector2i& position, const Team& team)
-	: position(position), team(team)
+ChessPiece::ChessPiece(GameBoard* board, const Vector2i& position, const Team& team)
+	: board(board), position(position), team(team)
 {
 	lastUpdateRound = 0;
 	allPossibleMoves.clear();

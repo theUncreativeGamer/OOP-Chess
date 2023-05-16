@@ -59,8 +59,7 @@ protected:
 	// This function finds every possible move the chess piece could make and store them in allPossibleMoves.
 	virtual void GeneratePossibleMoves();
 public:
-	ChessPiece() {};
-	ChessPiece(const Vector2i& position, const Team& team);
+	ChessPiece(GameBoard* board, const Vector2i& position, const Team& team);
 
 	// This function gets every possible move the chess piece could make.
 	const std::list<ChessMove>& GetAllPossibleMoves();
@@ -73,9 +72,6 @@ public:
 	
 	void setPosition(Vector2i pos) {
 		this->position = pos;
-	}
-	void setTeam(Team T) {
-		this->team = T;
 	}
 	
 	Vector2i getPosition() {

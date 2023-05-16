@@ -8,8 +8,7 @@ protected:
     void GeneratePossibleMoves();
 public:
     static const std::string type;
-    Bishop() {};
-    Bishop(const Vector2i& position, const Team& team);
+    Bishop(GameBoard* board, const Vector2i& position, const Team& team);
     const std::string& GetType();
 };
 
