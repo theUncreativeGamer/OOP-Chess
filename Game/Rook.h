@@ -4,9 +4,12 @@ class Rook :
     public ChessPiece
 {
 protected:
-    const Vector2i moveDirs[4];
+    static const Vector2i moveDirs[4];
     void GeneratePossibleMoves();
 public:
-    Rook(GameBoard* board, const Vector2i& position, const Team& team);
+    static const std::string type;
+    Rook() {};
+    Rook(const Vector2i& position, const Team& team);
+    const std::string& GetType();
 };
 

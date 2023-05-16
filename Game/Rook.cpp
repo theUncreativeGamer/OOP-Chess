@@ -1,16 +1,16 @@
 #pragma once
-#include "ChessPiece.h"
 #include "Rook.h"
-
-const Vector2i moveDirs[4]{
-	Vector2i(1,0),
-	Vector2i(0,-1),
-	Vector2i(0,1),
-	Vector2i(-1,0)
+const Vector2i Rook::moveDirs[4] = {
+		{1,0},
+		{0,-1},
+		{0,1},
+		{-1,0}
 };
-void Rook::GeneratePossibleMoves() {
+
+void Rook::GeneratePossibleMoves()
+{
 	for (int i = 0; i < 4; i++) {
-		for (int j = 1; j <= 4; j++) {
+		for (int j = 1; j <= 7; j++) {
 			Vector2i destination = position + moveDirs[i] * j;
 			if (!board->PositionIsInBounds(destination)) break; // 出界
 
@@ -24,12 +24,19 @@ void Rook::GeneratePossibleMoves() {
 				allPossibleMoves.push_back(ChessMove(destination));
 				break;
 			}
-			else if (target->GetTeam() == team) break; // 玩家棋子位置
+			else break; // 玩家棋子位置
 		}
 	}
 }
-Rook::Rook(GameBoard* board, const Vector2i& position, const Team& team) :
-	ChessPiece(board, position, team, "Rook")
+
+Rook::Rook(const Vector2i& position, const Team& team)
+	: ChessPiece(position, team)
 {
 }
 
+const std::string Rook::type = "Rook";
+
+const std::string& Rook::GetType()
+{
+	return type;
+}

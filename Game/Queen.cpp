@@ -2,7 +2,7 @@
 #include "ChessPiece.h"
 #include "Queen.h"
 
-const Vector2i moveDirs[8]=
+const Vector2i Queen::moveDirs[8]=
 {
 	{1,0},
 	{0,-1},
@@ -34,8 +34,15 @@ void Queen::GeneratePossibleMoves() {
 	}
 }
 
-Queen::Queen(GameBoard* board, const Vector2i& position, const Team& team) :
-	ChessPiece(board, position, team, "Queen")
+Queen::Queen(const Vector2i& position, const Team& team) :
+	ChessPiece(position, team)
 {
+}
+
+const std::string Queen::type = "Queen";
+
+const std::string& Queen::GetType()
+{
+	return type;
 }
 

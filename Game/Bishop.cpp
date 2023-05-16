@@ -1,15 +1,15 @@
 #include "Bishop.h"
 
-const Vector2i moveDirs[4]=
+const Vector2i Bishop::moveDirs[4]=
 {
-	Vector2i(1,1),
-	Vector2i(-1,-1),
-	Vector2i(1,-1),
-	Vector2i(-1,1)
+	{1,1},
+	{-1,-1},
+	{1,-1},
+	{-1,1}
 };
 void Bishop::GeneratePossibleMoves() {
 	for (int i = 0; i < 4; i++) {
-		for (int j = 1; j <= 4; j++) {
+		for (int j = 1; j <= 7; j++) {
 			Vector2i destination = position + moveDirs[i] * j;
 			if (!board->PositionIsInBounds(destination)) break; // ¥X¬É
 
@@ -28,9 +28,16 @@ void Bishop::GeneratePossibleMoves() {
 	}
 }
 
-Bishop::Bishop(GameBoard* board, const Vector2i& position, const Team& team) :
-	ChessPiece(board, position, team, "Bishop")
+Bishop::Bishop(const Vector2i& position, const Team& team) :
+	ChessPiece(position, team)
 {
+}
+
+const std::string Bishop::type = "Bishop";
+
+const std::string& Bishop::GetType()
+{
+	return type;
 }
 
 
