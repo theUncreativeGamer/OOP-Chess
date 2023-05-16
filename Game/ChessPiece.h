@@ -40,6 +40,9 @@ protected:
 	// Pointer to the board this object is on.
 	GameBoard* board;
 
+	// The identifier for what type of piece this object is.
+	std::string type;
+
 	// The position of this object on the board.
 	Vector2i position;
 
@@ -59,23 +62,16 @@ protected:
 	// This function finds every possible move the chess piece could make and store them in allPossibleMoves.
 	virtual void GeneratePossibleMoves();
 public:
-	ChessPiece() {};
-	ChessPiece(const Vector2i& position, const Team& team);
+	ChessPiece(GameBoard* board, const Vector2i& position, const Team& team, const std::string& name = "NewObject");
 
 	// This function gets every possible move the chess piece could make.
 	const std::list<ChessMove>& GetAllPossibleMoves();
 
 	// The team this object is on.
 	const Team& GetTeam();
-
-	// The identifier for what type of piece this object is.
-	virtual const std::string& GetType() = 0;
 	
 	void setPosition(Vector2i pos) {
 		this->position = pos;
-	}
-	void setTeam(Team T) {
-		this->team = T;
 	}
 	
 	Vector2i getPosition() {

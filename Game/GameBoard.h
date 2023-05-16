@@ -1,12 +1,11 @@
-#pragma once
 #include "Vector2i.h"
+#include "ChessPiece.h"
 #include <memory>
 #include <list>
 #include <vector>
 #include <string>
 
 class ChessPiece;
-enum Team;
 
 class GameBoard
 {
@@ -21,7 +20,7 @@ protected:
 	size_t currentRound;
 
 	// A list of chess pieces on this board. 
-	std::list<ChessPiece*> pieces;
+	std::list<ChessPiece> pieces;
 
 	// A grid of pointers stating the position of each chess pieces.
 	std::vector<std::vector<ChessPiece*>> grid;
@@ -35,7 +34,6 @@ protected:
 	size_t halfmoveClock = 0;
 public:
 	GameBoard(const size_t& width = 8, const size_t& height = 8);
-	~GameBoard();
 	const size_t& GetWidth() const;
 	const size_t& GetHeight() const;
 	const size_t& GetCurrentRound() const;
@@ -46,13 +44,9 @@ public:
 	// Get a pointer to the chess piece on a specific tile in the grid.
 	ChessPiece* GetPiece(Vector2i position);
 
-	// Attempt to create a certain type of chess piece on certain position.
-	// Returns the pointer to the created ChessPiece if success. Returns nullptr if fail.
-	// If there is already a piece on the certain position, this function will fail.
-	ChessPiece* AddPiece(const std::string& type, const Vector2i& position, const Team& team);
+	// Get a read-only pointer to the chess piece on a specific tile in the grid.
+	const ChessPiece* GetPiece(Vector2i position) const;
 
-	// Remove the chess piece on the certain position.
-	// Returns true if something is actually removed.
-	bool RemovePiece(const Vector2i& position);
+	
 };
 

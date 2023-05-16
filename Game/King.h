@@ -7,9 +7,6 @@ protected:
     const Vector2i moveDirs[8];
     void GeneratePossibleMoves();
 public:
-    static const std::string type;
-    King() {};
-    King(const Vector2i& position, const Team& team);
-    const std::string& GetType();
+    King(GameBoard* board, const Vector2i& position, const Team& team);
 };
 

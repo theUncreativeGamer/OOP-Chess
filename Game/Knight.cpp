@@ -1,6 +1,6 @@
 #include "Knight.h"
 
-const Vector2i Knight::moveDirs[8] =
+const Vector2i moveDirs[8] =
 {
 	Vector2i(  1,  2),
 	Vector2i(  2,  1),
@@ -27,16 +27,9 @@ void Knight::GeneratePossibleMoves()
 	}
 }
 
-Knight::Knight(const Vector2i& position, const Team& team)
-	: ChessPiece(position, team)
+Knight::Knight(GameBoard* board, const Vector2i& position, const Team& team)
+	: ChessPiece(board, position, team, "knight")
 {
-}
-
-const std::string Knight::type = "Knight";
-
-const std::string& Knight::GetType()
-{
-	return type;
 }
 
 

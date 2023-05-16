@@ -30,6 +30,9 @@
     <ClCompile Include="Bishop.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
+    <ClCompile Include="Rook.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
     <ClCompile Include="King.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
@@ -40,9 +43,6 @@
       <Filter>來源檔案</Filter>
     </ClCompile>
     <ClCompile Include="LoadBoard.cpp">
-      <Filter>來源檔案</Filter>
-    </ClCompile>
-    <ClCompile Include="Rook.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
     <ClCompile Include="Pawn.cpp">
@@ -65,16 +65,19 @@
     <ClInclude Include="Bishop.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="Rook.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
     <ClInclude Include="King.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="Queen.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="Rook.h">
+    <ClInclude Include="Pawn.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="Pawn.h">
+    <ClInclude Include="Player.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>

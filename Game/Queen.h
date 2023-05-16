@@ -4,12 +4,9 @@ class Queen :
     public ChessPiece
 {
 protected:
-    static const Vector2i moveDirs[8];
+    const Vector2i moveDirs[8];
     void GeneratePossibleMoves();
 public:
-    static const std::string type;
-    Queen() {};
-    Queen(const Vector2i& position, const Team& team);
-    const std::string& GetType();
+    Queen(GameBoard* board, const Vector2i& position, const Team& team);
 };
 

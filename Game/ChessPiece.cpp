@@ -4,8 +4,8 @@ void ChessPiece::GeneratePossibleMoves()
 {
 }
 
-ChessPiece::ChessPiece(const Vector2i& position, const Team& team)
-	: position(position), team(team)
+ChessPiece::ChessPiece(GameBoard* board, const Vector2i& position, const Team& team, const std::string& name)
+	: board(board), type(name), position(position), team(team)
 {
 	lastUpdateRound = 0;
 	allPossibleMoves.clear();
@@ -26,8 +26,6 @@ const Team& ChessPiece::GetTeam()
 {
 	return team;
 }
-
-
 
 void ChessMove::DoCommonThing(GameBoard& board, const Vector2i& position)
 {

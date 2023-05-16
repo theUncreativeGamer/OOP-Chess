@@ -17,7 +17,7 @@ void Pawn::GeneratePossibleMoves()
 				allPossibleMoves.push_back(ChessMove(destination));
 			}
 		}
-		if (!hasMoved) // 還沒動過，可走兩格
+		if (!isMoved) // 還沒動過，可走兩格
 		{
 			destination = position + moveDirs[0] * 2;
 			if (board->PositionIsInBounds(destination)) {
@@ -39,7 +39,7 @@ void Pawn::GeneratePossibleMoves()
 				allPossibleMoves.push_back(ChessMove(destination));
 			}
 		}
-		if (!hasMoved) // 還沒動過，可走兩格
+		if (!isMoved) // 還沒動過，可走兩格
 		{
 			destination = position + moveDirs[1] * 2;
 			if (board->PositionIsInBounds(destination)) {
@@ -52,8 +52,6 @@ void Pawn::GeneratePossibleMoves()
 		}
 	}
 }
-
-/*
 void Pawn::Promote()
 {
 	std::cout << "選擇要升變成的棋子:\n1.皇后\n2.主教\n3.城堡\n4.騎士" << std::endl;
@@ -73,19 +71,10 @@ void Pawn::Promote()
 	}
 	delete this;
 }
-*/
 
-
-Pawn::Pawn(const Vector2i& position, const Team& team)
-	: ChessPiece(position, team)
+Pawn::Pawn(GameBoard* board, const Vector2i& position, const Team& team)
+	: ChessPiece(board, position, team, "Pawn")
 {
-}
-
-const std::string Pawn::type = "Pawn";
-
-const std::string& Pawn::GetType()
-{
-	return type;
 }
 
 
