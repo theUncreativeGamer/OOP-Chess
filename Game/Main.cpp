@@ -11,6 +11,6 @@
 void main()
 {
 	GameBoard board;
-	board.AddPiece(Knight::type, { 0,0 }, Team::White);
-	board.RemovePiece({ 0,0 });
+	//board.AddPiece(Knight::type, { 0,0 }, Team::White);
+	//board.RemovePiece({ 0,0 });
 }
