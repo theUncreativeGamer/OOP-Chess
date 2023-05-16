@@ -58,34 +58,34 @@ ChessPiece* GameBoard::GetPiece(Vector2i position)
 	return grid[position.y][position.x];
 }
 
-ChessPiece* GameBoard::AddPiece(const std::string& type, const Vector2i& position, const Team& team)
+/*ChessPiece* GameBoard::AddPiece(const std::string& type, const Vector2i& position, const Team& team)
 {
 	if (GetPiece(position) != nullptr)
 		return nullptr;
 
 	if (type == Pawn::type)
 	{
-		pieces.push_back(new Pawn(this, position, team));
+		pieces.push_back(new Pawn(position, team));
 	}
 	else if (type == Rook::type)
 	{
-		pieces.push_back(new Rook(this, position, team));
+		pieces.push_back(new Rook(position, team));
 	}
 	else if (type == Knight::type)
 	{
-		pieces.push_back(new Knight(this, position, team));
+		pieces.push_back(new Knight( position, team));
 	}
 	else if (type == Bishop::type)
 	{
-		pieces.push_back(new Bishop(this, position, team));
+		pieces.push_back(new Bishop(position, team));
 	}
 	else if (type == Queen::type)
 	{
-		pieces.push_back(new Queen(this, position, team));
+		pieces.push_back(new Queen(position, team));
 	}
 	else if (type == King::type)
 	{
-		pieces.push_back(new King(this, position, team));
+		pieces.push_back(new King(position, team));
 	}
 	else
 	{
@@ -94,7 +94,7 @@ ChessPiece* GameBoard::AddPiece(const std::string& type, const Vector2i& positio
 
 	grid[position.y][position.x] = pieces.back();
 	return pieces.back();
-}
+}*/
 
 bool GameBoard::RemovePiece(const Vector2i& position)
 {

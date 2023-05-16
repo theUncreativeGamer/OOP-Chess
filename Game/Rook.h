@@ -8,7 +8,8 @@ protected:
     void GeneratePossibleMoves();
 public:
     static const std::string type;
-    Rook(GameBoard* board, const Vector2i& position, const Team& team);
+    Rook() {};
+    Rook(const Vector2i& position, const Team& team);
     const std::string& GetType();
 };
 
