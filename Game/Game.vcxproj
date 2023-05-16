@@ -138,6 +138,7 @@
     <ClCompile Include="Queen.cpp" />
     <ClCompile Include="Rook.cpp" />
     <ClCompile Include="Vector2i.cpp" />
+    <ClCompile Include="ViewManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bishop.h" />
