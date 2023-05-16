@@ -1,24 +1,14 @@
 #include "GameBoard.h"
-#include "ChessPiece.h"
-#include "Pawn.h"
-#include "Rook.h"
-#include "Knight.h"
-#include "Bishop.h"
-#include "Queen.h"
-#include "King.h"
-#include <iostream>
 
 GameBoard::GameBoard(const size_t& width, const size_t& height)
 	: width(width), height(height), currentRound(1), eppp(-1,-1)
 {
 	pieces.clear();
 	grid.resize(height);
-	for (int i = 0; i < height; i++)
+	for (std::vector<ChessPiece*> vec : grid)
 	{
-		grid[i].resize(width);
+		vec.resize(width);
 	}
-	std::cout << "height is " << grid.size() << std::endl;
-	std::cout << "width is " << grid[0].size() << std::endl;
 }
 
 const size_t& GameBoard::GetWidth() const
@@ -58,60 +48,11 @@ ChessPiece* GameBoard::GetPiece(Vector2i position)
 	return grid[position.y][position.x];
 }
 
-ChessPiece* GameBoard::AddPiece(const std::string& type, const Vector2i& position, const Team& team)
+const ChessPiece* GameBoard::GetPiece(Vector2i position) const
 {
-	if (GetPiece(position) != nullptr)
+	if (!PositionIsInBounds(position))
 		return nullptr;
-
-	if (type == Pawn::type)
-	{
-		pieces.push_back(new Pawn(this, position, team));
-	}
-	else if (type == Rook::type)
-	{
-		pieces.push_back(new Rook(this, position, team));
-	}
-	else if (type == Knight::type)
-	{
-		pieces.push_back(new Knight(this, position, team));
-	}
-	else if (type == Bishop::type)
-	{
-		pieces.push_back(new Bishop(this, position, team));
-	}
-	else if (type == Queen::type)
-	{
-		pieces.push_back(new Queen(this, position, team));
-	}
-	else if (type == King::type)
-	{
-		pieces.push_back(new King(this, position, team));
-	}
-	else
-	{
-		return nullptr;
-	}
-
-	grid[position.y][position.x] = pieces.back();
-	return pieces.back();
-}
-
-bool GameBoard::RemovePiece(const Vector2i& position)
-{
-	if (GetPiece(position) == nullptr)
-		return false;
-	grid[position.y][position.x] = nullptr;
-	for (auto it = pieces.begin(); it != pieces.end(); it++)
-	{
-		if ((*it)->getPosition() == position)
-		{
-			delete (*it);
-			pieces.erase(it);
-			return true;
-		}
-	}
-
-	return false;
+	return grid[position.y][position.x];
 }
 
 
