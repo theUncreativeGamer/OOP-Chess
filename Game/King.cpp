@@ -27,8 +27,8 @@ void King::GeneratePossibleMoves()
 	}
 }
 
-King::King(const Vector2i& position, const Team& team)
-	: ChessPiece(position, team)
+King::King(const Vector2i& position, const Team& team, GameBoard* board)
+	: ChessPiece(position, team, board)
 {
 }
 

@@ -9,7 +9,7 @@ protected:
 public:
     static const std::string type;
     Knight() {};
-    Knight(const Vector2i& position, const Team& team);
+    Knight(const Vector2i& position, const Team& team, GameBoard* board);
     const std::string& GetType() const;
 };
 

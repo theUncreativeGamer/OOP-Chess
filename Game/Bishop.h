@@ -9,7 +9,7 @@ protected:
 public:
     static const std::string type;
     Bishop() {};
-    Bishop(const Vector2i& position, const Team& team);
+    Bishop(const Vector2i& position, const Team& team, GameBoard* board);
     const std::string& GetType() const;
 };
 

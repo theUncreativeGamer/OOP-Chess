@@ -34,8 +34,8 @@ void Queen::GeneratePossibleMoves() {
 	}
 }
 
-Queen::Queen(const Vector2i& position, const Team& team) :
-	ChessPiece(position, team)
+Queen::Queen(const Vector2i& position, const Team& team, GameBoard* board) :
+	ChessPiece(position, team, board)
 {
 }
 

@@ -68,7 +68,7 @@ protected:
 	void AddCommonMove(const Vector2i& destination);
 public:
 	ChessPiece() {};
-	ChessPiece(const Vector2i& position, const Team& team);
+	ChessPiece(const Vector2i& position, const Team& team, GameBoard* board);
 
 	// This function gets every possible move the chess piece could make.
 	const std::list<ChessMove>& GetAllPossibleMoves();

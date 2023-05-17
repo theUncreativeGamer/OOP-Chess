@@ -72,27 +72,27 @@ ChessPiece* GameBoard::AddPiece(const std::string& type, const Vector2i& positio
 
 	if (type == Pawn::type)
 	{
-		pieces.push_back(new Pawn(position, team));
+		pieces.push_back(new Pawn(position, team, this));
 	}
 	else if (type == Rook::type)
 	{
-		pieces.push_back(new Rook(position, team));
+		pieces.push_back(new Rook(position, team, this));
 	}
 	else if (type == Knight::type)
 	{
-		pieces.push_back(new Knight( position, team));
+		pieces.push_back(new Knight(position, team, this));
 	}
 	else if (type == Bishop::type)
 	{
-		pieces.push_back(new Bishop(position, team));
+		pieces.push_back(new Bishop(position, team, this));
 	}
 	else if (type == Queen::type)
 	{
-		pieces.push_back(new Queen(position, team));
+		pieces.push_back(new Queen(position, team, this));
 	}
 	else if (type == King::type)
 	{
-		pieces.push_back(new King(position, team));
+		pieces.push_back(new King(position, team, this));
 	}
 	else
 	{

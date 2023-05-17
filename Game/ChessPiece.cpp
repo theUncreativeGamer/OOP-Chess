@@ -9,8 +9,8 @@ void ChessPiece::AddCommonMove(const Vector2i& destination)
 	allPossibleMoves.push_back(ChessMove(destination, board, this));
 }
 
-ChessPiece::ChessPiece(const Vector2i& position, const Team& team)
-	: position(position), team(team)
+ChessPiece::ChessPiece(const Vector2i& position, const Team& team, GameBoard* board)
+	: position(position), team(team), board(board)
 {
 	lastUpdateRound = 0;
 	allPossibleMoves.clear();
