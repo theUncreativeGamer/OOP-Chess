@@ -83,9 +83,7 @@ public:
 	// Returns true if succeed.
 	bool MoveTo(const Vector2i& pos);
 	
-	void setPosition(Vector2i pos) {
-		this->position = pos;
-	}
+	
 	void setTeam(Team T) {
 		this->team = T;
 	}

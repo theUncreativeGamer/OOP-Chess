@@ -1,4 +1,5 @@
 #include "King.h"
+#include "Rook.h"
 
 const Vector2i moveDirs[8] =
 {
@@ -25,6 +26,34 @@ void King::GeneratePossibleMoves()
 			AddCommonMove(destination);
 		}
 	}
+	if (isMoved)
+		return;
+	if (team == Team::White)
+	{
+		ChessPiece* wqr = board->GetPiece({ 0,7 });
+		if (wqr != nullptr && wqr->GetTeam() == Team::White && wqr->GetType() == Rook::type)
+		{
+			allPossibleMoves.push_back(CastlingMove(Vector2i( 2,7 ), board, dynamic_cast<ChessPiece*>(this), *wqr, true));
+		}
+		ChessPiece* wkr = board->GetPiece({ 7,7 });
+		if (wkr != nullptr && wkr->GetTeam() == Team::White && wkr->GetType() == Rook::type)
+		{
+			allPossibleMoves.push_back(CastlingMove(Vector2i(6, 7), board, dynamic_cast<ChessPiece*>(this), *wkr, true));
+		}
+	}
+	else if (team == Team::Black)
+	{
+		ChessPiece* bqr = board->GetPiece({ 0,0 });
+		if (bqr != nullptr && bqr->GetTeam() == Team::Black && bqr->GetType() == Rook::type)
+		{
+			allPossibleMoves.push_back(CastlingMove(Vector2i(2, 0), board, dynamic_cast<ChessPiece*>(this), *bqr, true));
+		}
+		ChessPiece* bkr = board->GetPiece({ 7,0 });
+		if (bkr != nullptr && bkr->GetTeam() == Team::Black && bkr->GetType() == Rook::type)
+		{
+			allPossibleMoves.push_back(CastlingMove(Vector2i(6, 0), board, dynamic_cast<ChessPiece*>(this), *bkr, true));
+		}
+	}
 }
 
 King::King(const Vector2i& position, const Team& team, GameBoard* board)
@@ -46,5 +75,13 @@ CastlingMove::CastlingMove(const Vector2i& destination, GameBoard* board, ChessP
 
 bool CastlingMove::DoSpecialThing()
 {
-	return false;
+	if (isQueenSide)
+	{
+		targetRook.MoveTo({ destination.x + 1,destination.y });
+	}
+	else
+	{
+		targetRook.MoveTo({ destination.x - 1,destination.y });
+	}
+	return true;
 }
