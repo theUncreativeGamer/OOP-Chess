@@ -48,6 +48,9 @@ public:
 	// Get a pointer to the chess piece on a specific tile in the grid.
 	ChessPiece* GetPiece(Vector2i position);
 
+	// Get a read-only pointer to the chess piece on a specific tile in the grid.
+	const ChessPiece* GetPiece(Vector2i position) const;
+
 	// Attempt to create a certain type of chess piece on certain position.
 	// Returns the pointer to the created ChessPiece if success. Returns nullptr if fail.
 	// If there is already a piece on the certain position, this function will fail.

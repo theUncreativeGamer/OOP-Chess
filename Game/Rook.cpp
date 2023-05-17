@@ -34,9 +34,9 @@ Rook::Rook(const Vector2i& position, const Team& team)
 {
 }
 
-const std::string Rook::type = "Rook";
+const std::string Rook::type = "³ù";
 
-const std::string& Rook::GetType()
+const std::string& Rook::GetType() const
 {
 	return type;
 }

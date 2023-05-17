@@ -33,9 +33,9 @@ Bishop::Bishop(const Vector2i& position, const Team& team) :
 {
 }
 
-const std::string Bishop::type = "Bishop";
+const std::string Bishop::type = "Ба";
 
-const std::string& Bishop::GetType()
+const std::string& Bishop::GetType() const
 {
 	return type;
 }

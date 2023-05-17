@@ -66,10 +66,10 @@ public:
 	const std::list<ChessMove>& GetAllPossibleMoves();
 
 	// The team this object is on.
-	const Team& GetTeam();
+	const Team& GetTeam() const;
 
 	// The identifier for what type of piece this object is.
-	virtual const std::string& GetType() = 0;
+	virtual const std::string& GetType() const = 0;
 	
 	void setPosition(Vector2i pos) {
 		this->position = pos;

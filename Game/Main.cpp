@@ -6,6 +6,7 @@
 #include "Bishop.h"
 #include "Queen.h"
 #include "King.h"
+#include "ViewManager.h"
 #include <iostream>
 
 const std::string defaultFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
@@ -16,4 +17,6 @@ int main()
 	board.AddPiece(Knight::type, { 0,0 }, Team::White);
 	board.RemovePiece({ 0,0 });
 	LoadBoard(board, defaultFEN);
+	ViewManager vm;
+	vm.showBoard_selectChess(board, Team::White);
 }

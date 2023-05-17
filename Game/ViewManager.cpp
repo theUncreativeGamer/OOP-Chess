@@ -1,4 +1,7 @@
 #include "ViewManager.h"
+#include "GameBoard.h"
+#include "ChessPiece.h"
+#include "Vector2i.h"
 using namespace std;
 
 int ViewManager::MainMenu() {
@@ -43,7 +46,7 @@ void ViewManager::SetColor(int color)
 	SetConsoleTextAttribute(hConsole, color);
 }
 
-void ViewManager::showBoard_selectChess(GameBoard board, Team current_player, int check=0)
+void ViewManager::showBoard_selectChess(const GameBoard& board, const Team& current_player, int check)
 {
 	system("cls");
 	if (current_player == Team::White) {
@@ -62,34 +65,40 @@ void ViewManager::showBoard_selectChess(GameBoard board, Team current_player, in
 	cout << "\\ x ¢é¢ê¢ë¢ì¢í¢î¢ï¢ð\n";
 	cout << "y   ----------------\n";
 
+
 	for (int i = 0; i < 8; i++) {
+		SetColor(FOREGROUND_INTENSITY);
 		cout << "|  ";
 		for (int j = 0; j < 8; j++) {
-			ChessPiece* chess = board.GetPiece(Vector2i(j, i));
-			if (chess->GetTeam() == White && (i + j) % 2 == 1) {
-				SetColor(111); // ¥Õ¦r¶À©³
-				//cout << chess->type;
-			}
-			else if (chess->GetTeam() == White && (i + j) % 2 == 0) {
-				SetColor(143); //¥Õ¦r¦Ç©³
-				//cout << chess->getType();
-			}
-			else if (chess->GetTeam() == Black && (i + j) % 2 == 1) {
-				SetColor(96); // ¶Â¦r¶À©³
-				//cout << chess->getType();
-			}
-			else if (chess->GetTeam() == Black && (i + j) % 2 == 0) {
-				SetColor(128); // ¶Â¦r¦Ç©³
-				//cout << chess->getType();
-			}
-			else if (chess == nullptr && (i + j) % 2 == 1) {
+			const ChessPiece* chess = board.GetPiece(Vector2i(j, i));
+			
+			if (chess == nullptr && (i + j) % 2 == 1) {
 				SetColor(111);
-				cout << " ";
+				cout << "¡@";
 			}
 			else if (chess == nullptr && (i + j) % 2 == 0) {
 				SetColor(143);
-				cout << " ";
+				cout << "¡@";
 			}
+			else if (chess->GetTeam() == White && (i + j) % 2 == 1) {
+				SetColor(111); // ¥Õ¦r¶À©³
+				cout << chess->GetType();
+			}
+			else if (chess->GetTeam() == White && (i + j) % 2 == 0) {
+				SetColor(143); //¥Õ¦r¦Ç©³
+				cout << chess->GetType();
+			}
+			else if (chess->GetTeam() == Black && (i + j) % 2 == 1) {
+				SetColor(96); // ¶Â¦r¶À©³
+				cout << chess->GetType();
+			}
+			else if (chess->GetTeam() == Black && (i + j) % 2 == 0) {
+				SetColor(128); // ¶Â¦r¦Ç©³
+				cout << chess->GetType();
+			}
+			
+			
+			
 		}
 		cout << endl;
 	}

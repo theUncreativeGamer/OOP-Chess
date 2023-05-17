@@ -17,8 +17,8 @@ GameBoard::GameBoard(const size_t& width, const size_t& height)
 	{
 		grid[i].resize(width);
 	}
-	std::cout << "height is " << grid.size() << std::endl;
-	std::cout << "width is " << grid[0].size() << std::endl;
+	//std::cout << "height is " << grid.size() << std::endl;
+	//std::cout << "width is " << grid[0].size() << std::endl;
 }
 
 const size_t& GameBoard::GetWidth() const
@@ -52,6 +52,13 @@ GameBoard::~GameBoard()
 }
 
 ChessPiece* GameBoard::GetPiece(Vector2i position)
+{
+	if (!PositionIsInBounds(position))
+		return nullptr;
+	return grid[position.y][position.x];
+}
+
+const ChessPiece* GameBoard::GetPiece(Vector2i position) const
 {
 	if (!PositionIsInBounds(position))
 		return nullptr;

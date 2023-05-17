@@ -104,23 +104,23 @@ bool LoadBoard(GameBoard& board, const std::string& fen)
 			break;
 		case 'r':
 			// 黑色 城堡
-			board.AddPiece(Pawn::type, nextPiecePosition, Team::Black);
+			board.AddPiece(Rook::type, nextPiecePosition, Team::Black);
 			break;
 		case 'n':
 			// 黑色 騎士
-			board.AddPiece(Pawn::type, nextPiecePosition, Team::Black);
+			board.AddPiece(Knight::type, nextPiecePosition, Team::Black);
 			break;
 		case 'b':
 			// 黑色 主教
-			board.AddPiece(Pawn::type, nextPiecePosition, Team::Black);
+			board.AddPiece(Bishop::type, nextPiecePosition, Team::Black);
 			break;
 		case 'q':
 			// 黑色 皇后
-			board.AddPiece(Pawn::type, nextPiecePosition, Team::Black);
+			board.AddPiece(Queen::type, nextPiecePosition, Team::Black);
 			break;
 		case 'k':
 			// 黑色 國王
-			board.AddPiece(Pawn::type, nextPiecePosition, Team::Black);
+			board.AddPiece(King::type, nextPiecePosition, Team::Black);
 			break;
 		default:
 			PrintErrorMessage(fen, index);
@@ -237,7 +237,7 @@ bool LoadBoard(GameBoard& board, const std::string& fen)
 	{
 		halfmoveCount = std::stoi(halfmoveCountText);
 	}
-	catch (const std::invalid_argument& e)
+	catch (const std::invalid_argument&)
 	{
 		PrintErrorMessage(fen, index);
 		return false;
@@ -256,7 +256,7 @@ bool LoadBoard(GameBoard& board, const std::string& fen)
 	{
 		currRound = std::stoi(currRoundText);
 	}
-	catch (const std::invalid_argument& e)
+	catch (const std::invalid_argument&)
 	{
 		PrintErrorMessage(fen, index);
 		return false;

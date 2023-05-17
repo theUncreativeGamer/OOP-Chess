@@ -15,6 +15,6 @@ public:
     static const std::string type;
     Pawn() {};
     Pawn(const Vector2i& position, const Team& team);
-    const std::string& GetType();
+    const std::string& GetType() const;
 };
 

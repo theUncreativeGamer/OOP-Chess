@@ -32,9 +32,9 @@ Knight::Knight(const Vector2i& position, const Team& team)
 {
 }
 
-const std::string Knight::type = "Knight";
+const std::string Knight::type = "ÃM";
 
-const std::string& Knight::GetType()
+const std::string& Knight::GetType() const
 {
 	return type;
 }

@@ -81,9 +81,9 @@ Pawn::Pawn(const Vector2i& position, const Team& team)
 {
 }
 
-const std::string Pawn::type = "Pawn";
+const std::string Pawn::type = "§L";
 
-const std::string& Pawn::GetType()
+const std::string& Pawn::GetType() const
 {
 	return type;
 }

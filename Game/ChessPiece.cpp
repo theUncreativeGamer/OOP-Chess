@@ -22,7 +22,7 @@ const std::list<ChessMove>& ChessPiece::GetAllPossibleMoves()
 	return allPossibleMoves;
 }
 
-const Team& ChessPiece::GetTeam()
+const Team& ChessPiece::GetTeam() const
 {
 	return team;
 }

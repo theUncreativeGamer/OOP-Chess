@@ -39,9 +39,9 @@ Queen::Queen(const Vector2i& position, const Team& team) :
 {
 }
 
-const std::string Queen::type = "Queen";
+const std::string Queen::type = "¦Z";
 
-const std::string& Queen::GetType()
+const std::string& Queen::GetType() const
 {
 	return type;
 }

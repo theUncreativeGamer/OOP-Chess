@@ -32,9 +32,9 @@ King::King(const Vector2i& position, const Team& team)
 {
 }
 
-const std::string King::type = "King";
+const std::string King::type = "¤ý";
 
-const std::string& King::GetType()
+const std::string& King::GetType() const
 {
 	return type;
 }
