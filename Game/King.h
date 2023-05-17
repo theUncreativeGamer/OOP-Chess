@@ -18,5 +18,6 @@ struct CastlingMove
 {
     ChessPiece& targetRook;
     bool isQueenSide;
-    //bool DoSpecialThing(GameBoard& board, const Vector2i& position, ChessPiece& piece, void* param = nullptr);
+    CastlingMove(const Vector2i& destination, GameBoard* board, ChessPiece* piece, ChessPiece& targetRook, const bool& isQueenSide);
+    bool DoSpecialThing();
 };

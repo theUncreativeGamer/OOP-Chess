@@ -13,6 +13,7 @@ class GameBoard
 protected:
 	friend struct ChessMove;
 	friend bool LoadBoard(GameBoard& board, const std::string& fen);
+	friend class ChessPiece;
 
 	size_t width;
 	size_t height;

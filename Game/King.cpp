@@ -39,3 +39,12 @@ const std::string& King::GetType() const
 	return type;
 }
 
+CastlingMove::CastlingMove(const Vector2i& destination, GameBoard* board, ChessPiece* piece, ChessPiece& targetRook, const bool& isQueenSide)
+	: ChessMove(destination, board, piece), targetRook(targetRook), isQueenSide(isQueenSide)
+{
+}
+
+bool CastlingMove::DoSpecialThing()
+{
+	return false;
+}

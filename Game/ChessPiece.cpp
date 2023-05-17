@@ -32,12 +32,25 @@ const Team& ChessPiece::GetTeam() const
 	return team;
 }
 
+bool ChessPiece::MoveTo(const Vector2i& destination)
+{
+	if (!(board->PositionIsInBounds(destination)))
+		return false;
+	if (board->GetPiece(destination) != nullptr)
+		return false;
+	board->grid[destination.y][destination.x] = this;
+	board->grid[position.y][position.x] = nullptr;
+	position = destination;
+}
 
 
-void ChessMove::DoCommonThing()
+
+void ChessMove::MoveThePiece()
 {
 	piece->isMoved = true;
 	board->eppp = { -1,-1 };
+	board->RemovePiece(destination);
+	piece->MoveTo(destination);
 }
 
 bool ChessMove::DoSpecialThing()

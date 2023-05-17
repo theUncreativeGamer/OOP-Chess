@@ -25,8 +25,8 @@ struct ChessMove
 	// The absolute coordinate of the destination the chess piece is moving into.
 	Vector2i destination;
 
-	// Things that are applied during every chess move.
-	void DoCommonThing();
+	// This makes piece move to destination.
+	void MoveThePiece();
 
 	// Please override this function if the chess piece does something special after moving.
 	// For example, en passent, promotion and castling.
@@ -78,6 +78,10 @@ public:
 
 	// The identifier for what type of piece this object is.
 	virtual const std::string& GetType() const = 0;
+
+	// Tries to move this piece to an empty tile.
+	// Returns true if succeed.
+	bool MoveTo(const Vector2i& pos);
 	
 	void setPosition(Vector2i pos) {
 		this->position = pos;
