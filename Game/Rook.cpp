@@ -17,11 +17,11 @@ void Rook::GeneratePossibleMoves()
 			ChessPiece* target = board->GetPiece(destination);
 			if (target == nullptr) // 空格
 			{
-				allPossibleMoves.push_back(ChessMove(destination));
+				AddCommonMove(destination);
 			}
 			else if (target->GetTeam() != team) // 敵方棋子位置
 			{
-				allPossibleMoves.push_back(ChessMove(destination));
+				AddCommonMove(destination);
 				break;
 			}
 			else break; // 玩家棋子位置

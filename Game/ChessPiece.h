@@ -16,18 +16,24 @@ enum Team
 // This struct describes how a valid move in the game of chess could be.
 struct ChessMove
 {
+	// The game board this move is performed on.
+	GameBoard* board;
+
+	// The chess piece being moved
+	ChessPiece* piece;
+
 	// The absolute coordinate of the destination the chess piece is moving into.
 	Vector2i destination;
 
 	// Things that are applied during every chess move.
-	void DoCommonThing(GameBoard& board, const Vector2i& position);
+	void DoCommonThing();
 
 	// Please override this function if the chess piece does something special after moving.
 	// For example, en passent, promotion and castling.
-	virtual bool DoSpecialThing(GameBoard& board, const Vector2i& position, void* param = nullptr);
+	virtual bool DoSpecialThing();
 
 	ChessMove();
-	ChessMove(Vector2i destination);
+	ChessMove(const Vector2i& destination, GameBoard* board, ChessPiece* piece);
 	~ChessMove() = default;
 };
 
@@ -58,6 +64,8 @@ protected:
 	// Please override this function.
 	// This function finds every possible move the chess piece could make and store them in allPossibleMoves.
 	virtual void GeneratePossibleMoves();
+
+	void AddCommonMove(const Vector2i& destination);
 public:
 	ChessPiece() {};
 	ChessPiece(const Vector2i& position, const Team& team);

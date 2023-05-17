@@ -4,6 +4,11 @@ void ChessPiece::GeneratePossibleMoves()
 {
 }
 
+void ChessPiece::AddCommonMove(const Vector2i& destination)
+{
+	allPossibleMoves.push_back(ChessMove(destination, board, this));
+}
+
 ChessPiece::ChessPiece(const Vector2i& position, const Team& team)
 	: position(position), team(team)
 {
@@ -29,16 +34,13 @@ const Team& ChessPiece::GetTeam() const
 
 
 
-void ChessMove::DoCommonThing(GameBoard& board, const Vector2i& position)
+void ChessMove::DoCommonThing()
 {
-	ChessPiece* piece = board.GetPiece(position);
-	if (piece == nullptr)
-		throw(std::invalid_argument("Something is wrong with the \"position\" parameter."));
 	piece->isMoved = true;
-	board.eppp = { -1,-1 };
+	board->eppp = { -1,-1 };
 }
 
-bool ChessMove::DoSpecialThing(GameBoard& board, const Vector2i& position, void* param)
+bool ChessMove::DoSpecialThing()
 {
 	return true;
 }
@@ -47,6 +49,7 @@ ChessMove::ChessMove() : destination(-1,-1)
 {
 }
 
-ChessMove::ChessMove(Vector2i destination) : destination(destination)
+ChessMove::ChessMove(const Vector2i& destination, GameBoard* board, ChessPiece* piece) 
+	: destination(destination), board(board), piece(piece)
 {
 }

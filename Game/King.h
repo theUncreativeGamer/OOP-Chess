@@ -13,3 +13,10 @@ public:
     const std::string& GetType() const;
 };
 
+struct CastlingMove
+    : ChessMove
+{
+    ChessPiece& targetRook;
+    bool isQueenSide;
+    //bool DoSpecialThing(GameBoard& board, const Vector2i& position, ChessPiece& piece, void* param = nullptr);
+};

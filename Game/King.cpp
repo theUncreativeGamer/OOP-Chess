@@ -22,7 +22,7 @@ void King::GeneratePossibleMoves()
 		ChessPiece* target = board->GetPiece(destination);
 		if (target == nullptr || target->GetTeam() != team)
 		{
-			allPossibleMoves.push_back(ChessMove(destination));
+			AddCommonMove(destination);
 		}
 	}
 }
@@ -38,5 +38,4 @@ const std::string& King::GetType() const
 {
 	return type;
 }
-
 

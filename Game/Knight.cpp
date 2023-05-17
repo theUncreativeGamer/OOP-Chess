@@ -22,7 +22,7 @@ void Knight::GeneratePossibleMoves()
 		ChessPiece* target = board->GetPiece(destination);
 		if (target == nullptr || target->GetTeam() != team)
 		{
-			allPossibleMoves.push_back(ChessMove(destination));
+			AddCommonMove(destination);
 		}
 	}
 }

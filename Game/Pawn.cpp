@@ -14,7 +14,7 @@ void Pawn::GeneratePossibleMoves()
 			ChessPiece* target = board->GetPiece(destination);
 			if (target == nullptr || target->GetTeam() != team)
 			{
-				allPossibleMoves.push_back(ChessMove(destination));
+				AddCommonMove(destination);
 			}
 		}
 		if (!hasMoved) // 還沒動過，可走兩格
@@ -24,7 +24,7 @@ void Pawn::GeneratePossibleMoves()
 				ChessPiece* target = board->GetPiece(destination);
 				if (target == nullptr || target->GetTeam() != team)
 				{
-					allPossibleMoves.push_back(ChessMove(destination));
+					AddCommonMove(destination);
 				}
 			}
 		}
@@ -36,7 +36,7 @@ void Pawn::GeneratePossibleMoves()
 			ChessPiece* target = board->GetPiece(destination);
 			if (target == nullptr || target->GetTeam() != team)
 			{
-				allPossibleMoves.push_back(ChessMove(destination));
+				AddCommonMove(destination);
 			}
 		}
 		if (!hasMoved) // 還沒動過，可走兩格
@@ -46,7 +46,7 @@ void Pawn::GeneratePossibleMoves()
 				ChessPiece* target = board->GetPiece(destination);
 				if (target == nullptr || target->GetTeam() != team)
 				{
-					allPossibleMoves.push_back(ChessMove(destination));
+					AddCommonMove(destination);
 				}
 			}
 		}
