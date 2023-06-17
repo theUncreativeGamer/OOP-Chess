@@ -4,6 +4,23 @@ void ChessPiece::GeneratePossibleMoves()
 {
 }
 
+void ChessPiece::RemoveInvalidMoves()
+{
+	for (std::list<ChessMove>::iterator it = allPossibleMoves.begin(); it != allPossibleMoves.end(); it++)
+	{
+		GameBoard tempBoard(*board);
+		ChessMove tempMove(it->destination, &tempBoard, tempBoard.GetPiece(position));
+		tempMove.MoveThePiece();
+
+		bool isInvalid = tempBoard.CheckCheckmate(team);
+		if (isInvalid) 
+		{
+			allPossibleMoves.erase(it);
+			it--;
+		}
+	}
+}
+
 void ChessPiece::AddCommonMove(const Vector2i& destination)
 {
 	allPossibleMoves.push_back(ChessMove(destination, board, this));
@@ -28,6 +45,7 @@ const std::list<ChessMove>& ChessPiece::GetAllPossibleMoves()
 	}
 	allPossibleMoves.clear();
 	GeneratePossibleMoves();
+	RemoveInvalidMoves();
 	return allPossibleMoves;
 }
 
@@ -70,3 +88,4 @@ ChessMove::ChessMove(const Vector2i& destination, GameBoard* board, ChessPiece* 
 	: destination(destination), board(board), piece(piece)
 {
 }
+

@@ -66,6 +66,9 @@ protected:
 	// This function finds every possible move the chess piece could make and store them in allPossibleMoves.
 	virtual void GeneratePossibleMoves();
 
+	// This function removes any move that will make its own king get checkmated.
+	void RemoveInvalidMoves();
+
 	void AddCommonMove(const Vector2i& destination);
 public:
 	ChessPiece();
