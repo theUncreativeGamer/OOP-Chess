@@ -10,7 +10,8 @@ class GameBoard;
 enum Team
 {
 	White,
-	Black
+	Black,
+	Undefined
 };
 
 // This struct describes how a valid move in the game of chess could be.
@@ -67,7 +68,7 @@ protected:
 
 	void AddCommonMove(const Vector2i& destination);
 public:
-	ChessPiece() {};
+	ChessPiece();
 	ChessPiece(const Vector2i& position, const Team& team, GameBoard* board);
 
 	// This function gets every possible move the chess piece could make.

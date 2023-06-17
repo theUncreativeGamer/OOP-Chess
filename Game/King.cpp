@@ -71,6 +71,7 @@ const std::string& King::GetType() const
 King* King::clone(GameBoard* anotherBoard) const
 {
 	King* result = new King(position, team, anotherBoard);
+	result->isMoved = isMoved;
 	return result;
 }
 

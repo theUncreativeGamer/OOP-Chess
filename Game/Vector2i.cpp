@@ -24,6 +24,11 @@ bool Vector2i::operator==(const Vector2i& rhs)
 	return x == rhs.x && y == rhs.y;
 }
 
+bool operator==(const Vector2i& lhs, const Vector2i rhs)
+{
+	return lhs.x == rhs.x && lhs.y == rhs.y;
+}
+
 Vector2i operator+(const Vector2i& lhs, const Vector2i rhs)
 {
 	Vector2i newVec(lhs);

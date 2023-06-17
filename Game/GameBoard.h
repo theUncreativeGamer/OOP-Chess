@@ -61,5 +61,7 @@ public:
 	// Remove the chess piece on the certain position.
 	// Returns true if something is actually removed.
 	bool RemovePiece(const Vector2i& position);
+
+	GameBoard() = default;
 };
 

@@ -12,6 +12,8 @@ struct Vector2i
 
 	bool operator==(const Vector2i& rhs);
 
+	friend bool operator==(const Vector2i& lhs, const Vector2i rhs);
+
 	friend Vector2i operator+(const Vector2i& lhs, const Vector2i rhs);
 	friend Vector2i operator-(const Vector2i& lhs, const Vector2i rhs);
 
