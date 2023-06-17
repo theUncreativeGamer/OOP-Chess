@@ -142,5 +142,41 @@ bool GameBoard::RemovePiece(const Vector2i& position)
 	return false;
 }
 
+bool GameBoard::CheckCheckmate(const Team& kingTeam)
+{
+	if (kingTeam == Team::Undefined)return false;
+
+	// Get the king(s)
+	std::vector<ChessPiece*> kings;
+	for (ChessPiece* p : pieces)
+	{
+		if (p->GetType() == King::type && p->GetTeam() == kingTeam)
+		{
+			kings.push_back(p);
+		}
+	}
+	if (kings.size() == 0)return false;
+
+
+	for (ChessPiece* king : kings)
+	{
+		// Get all possible moves of every opposing piece
+		Team opposingTeam = kingTeam == Team::Black ? Team::White : Team::Black;
+		for (ChessPiece* p : pieces)
+		{
+			if (p->GetTeam() == opposingTeam)
+			{
+				const std::list<ChessMove>& moves = p->GetAllPossibleMoves();
+				for (const ChessMove& m : moves)
+				{
+					if (m.destination == king->getPosition())return true;
+				}
+			}
+		}
+	}
+	
+	return false;
+}
+
 
 

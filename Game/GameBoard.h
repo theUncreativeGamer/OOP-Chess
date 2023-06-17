@@ -62,6 +62,8 @@ public:
 	// Returns true if something is actually removed.
 	bool RemovePiece(const Vector2i& position);
 
+	bool CheckCheckmate(const Team& kingTeam);
+
 	GameBoard() = default;
 };
 
