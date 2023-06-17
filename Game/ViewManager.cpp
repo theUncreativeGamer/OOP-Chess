@@ -9,7 +9,6 @@ int ViewManager::MainMenu() {
 	int choice = 0;
 	cout << "選擇模式\n"
 		<< "1:玩家對玩家\n"
-		<< "2:玩家對電腦\n"
 		<< "3:離開遊戲\n";
 	cin >> choice;
 	while (choice < 1 || choice > 3) {
@@ -19,7 +18,6 @@ int ViewManager::MainMenu() {
 		system("cls");
 		cout << "選擇模式\n"
 			<< "1:玩家對玩家\n"
-			<< "2:玩家對電腦\n"
 			<< "3:離開遊戲\n";
 		cin >> choice;
 	}
@@ -31,7 +29,6 @@ int ViewManager::GameMenu() {
 	system("cls");
 	cout << "請問要進行新遊戲或是載入遊戲紀錄?\n"
 		<< "1: 新遊戲\n"
-		<< "2: 載入遊戲\n"
 		<< "3: 載入FEN代碼\n";
 
 	int option;
@@ -63,13 +60,14 @@ void ViewManager::showBoard_selectChess(const GameBoard& board, const Team& curr
 		cout << "將軍!!\n";
 	}
 	cout << "\\ x ａｂｃｄｅｆｇｈ\n";
-	cout << "y   ----------------\n";
+	cout << "y   －－－－－－－－\n";
 
 
 	for (int i = 0; i < 8; i++) {
-		SetColor(FOREGROUND_INTENSITY);
-		cout << "|  ";
+		SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+		cout << 8 - i << "|  ";
 		for (int j = 0; j < 8; j++) {
+			SetColor(FOREGROUND_INTENSITY);
 			const ChessPiece* chess = board.GetPiece(Vector2i(j, i));
 			
 			if (chess == nullptr && (i + j) % 2 == 1) {

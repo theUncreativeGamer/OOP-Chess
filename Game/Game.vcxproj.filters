@@ -48,6 +48,9 @@
     <ClCompile Include="Pawn.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
+    <ClCompile Include="ViewManager.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameBoard.h">

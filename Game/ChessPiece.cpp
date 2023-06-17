@@ -13,7 +13,6 @@ ChessPiece::ChessPiece(const Vector2i& position, const Team& team, GameBoard* bo
 	: position(position), team(team), board(board)
 {
 	lastUpdateRound = 0;
-	allPossibleMoves.clear();
 }
 
 const std::list<ChessMove>& ChessPiece::GetAllPossibleMoves()
@@ -58,7 +57,7 @@ bool ChessMove::DoSpecialThing()
 	return true;
 }
 
-ChessMove::ChessMove() : destination(-1,-1)
+ChessMove::ChessMove() : destination(-1,-1), board(nullptr), piece(nullptr)
 {
 }
 
