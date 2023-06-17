@@ -79,6 +79,8 @@ public:
 	// The identifier for what type of piece this object is.
 	virtual const std::string& GetType() const = 0;
 
+	virtual ChessPiece* clone(GameBoard* anotherBoard) const = 0;
+
 	// Tries to move this piece to an empty tile.
 	// Returns true if succeed.
 	bool MoveTo(const Vector2i& pos);

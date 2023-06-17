@@ -40,4 +40,10 @@ const std::string& Bishop::GetType() const
 	return type;
 }
 
+Bishop* Bishop::clone(GameBoard* anotherBoard) const
+{
+	Bishop* result = new Bishop(position, team, anotherBoard);
+	return result;
+}
+
 

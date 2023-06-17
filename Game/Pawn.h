@@ -16,5 +16,6 @@ public:
     Pawn() {};
     Pawn(const Vector2i& position, const Team& team, GameBoard* board);
     const std::string& GetType() const;
+    Pawn* clone(GameBoard* anotherBoard) const override;
 };
 

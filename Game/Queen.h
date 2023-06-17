@@ -11,5 +11,6 @@ public:
     Queen() {};
     Queen(const Vector2i& position, const Team& team, GameBoard* board);
     const std::string& GetType() const;
+    Queen* clone(GameBoard* anotherBoard) const override;
 };
 

@@ -21,6 +21,27 @@ GameBoard::GameBoard(const size_t& width, const size_t& height)
 	//std::cout << "width is " << grid[0].size() << std::endl;
 }
 
+GameBoard::GameBoard(const GameBoard& another)
+	: width(another.width), height(another.height), currentRound(another.currentRound),
+	currentPlayer(another.currentPlayer), halfmoveClock(another.halfmoveClock), eppp(another.eppp)
+{
+	for (const ChessPiece* p : another.pieces)
+	{
+		pieces.push_back(p->clone(this));
+	}
+
+	grid.resize(height);
+	for (std::vector<ChessPiece*>& v : grid)
+	{
+		v.resize(width);
+	}
+
+	for (ChessPiece* p : pieces)
+	{
+		grid[p->getPosition().y][p->getPosition().x] = p;
+	}
+}
+
 const size_t& GameBoard::GetWidth() const
 {
 	return width;

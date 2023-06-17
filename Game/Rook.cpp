@@ -40,3 +40,9 @@ const std::string& Rook::GetType() const
 {
 	return type;
 }
+
+Rook* Rook::clone(GameBoard* anotherBoard) const
+{
+	Rook* result = new Rook(position, team, anotherBoard);
+	return result;
+}

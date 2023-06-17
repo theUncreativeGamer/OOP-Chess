@@ -88,4 +88,10 @@ const std::string& Pawn::GetType() const
 	return type;
 }
 
+Pawn* Pawn::clone(GameBoard* anotherBoard) const
+{
+	Pawn* result = new Pawn(position, team, anotherBoard);
+	return result;
+}
+
 

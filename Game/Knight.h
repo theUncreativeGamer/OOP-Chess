@@ -11,5 +11,6 @@ public:
     Knight() {};
     Knight(const Vector2i& position, const Team& team, GameBoard* board);
     const std::string& GetType() const;
+    Knight* clone(GameBoard* anotherBoard) const override;
 };
 

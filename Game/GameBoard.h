@@ -38,6 +38,7 @@ protected:
 	Team currentPlayer;
 public:
 	GameBoard(const size_t& width = 8, const size_t& height = 8);
+	GameBoard(const GameBoard& another);
 	~GameBoard();
 	const size_t& GetWidth() const;
 	const size_t& GetHeight() const;

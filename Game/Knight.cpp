@@ -39,4 +39,10 @@ const std::string& Knight::GetType() const
 	return type;
 }
 
+Knight* Knight::clone(GameBoard* anotherBoard) const
+{
+	Knight* result = new Knight(position, team, anotherBoard);
+	return result;
+}
+
 

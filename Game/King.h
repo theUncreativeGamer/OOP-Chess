@@ -11,6 +11,7 @@ public:
     King() {};
     King(const Vector2i& position, const Team& team, GameBoard* board);
     const std::string& GetType() const;
+    King* clone(GameBoard* anotherBoard) const override;
 };
 
 struct CastlingMove

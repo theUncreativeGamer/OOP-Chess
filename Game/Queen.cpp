@@ -46,3 +46,9 @@ const std::string& Queen::GetType() const
 	return type;
 }
 
+Queen* Queen::clone(GameBoard* anotherBoard) const
+{
+	Queen* result = new Queen(position, team, anotherBoard);
+	return result;
+}
+

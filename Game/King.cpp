@@ -68,6 +68,12 @@ const std::string& King::GetType() const
 	return type;
 }
 
+King* King::clone(GameBoard* anotherBoard) const
+{
+	King* result = new King(position, team, anotherBoard);
+	return result;
+}
+
 CastlingMove::CastlingMove(const Vector2i& destination, GameBoard* board, ChessPiece* piece, ChessPiece& targetRook, const bool& isQueenSide)
 	: ChessMove(destination, board, piece), targetRook(targetRook), isQueenSide(isQueenSide)
 {

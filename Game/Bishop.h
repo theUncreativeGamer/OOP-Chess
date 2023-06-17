@@ -11,5 +11,6 @@ public:
     Bishop() {};
     Bishop(const Vector2i& position, const Team& team, GameBoard* board);
     const std::string& GetType() const;
+    Bishop* clone(GameBoard* anotherBoard) const override;
 };
 
