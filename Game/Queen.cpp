@@ -14,7 +14,7 @@ const Vector2i Queen::moveDirs[8]=
 	{-1,1}
 };
 void Queen::GeneratePossibleMoves() {
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 8; i++) {
 		for (int j = 1; j <= 8; j++) {
 			Vector2i destination = position + moveDirs[i] * j;
 			if (!board->PositionIsInBounds(destination)) break; // ¥X¬É

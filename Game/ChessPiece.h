@@ -15,8 +15,10 @@ enum Team
 };
 
 // This struct describes how a valid move in the game of chess could be.
-struct ChessMove
+class ChessMove
 {
+public:
+
 	// The game board this move is performed on.
 	GameBoard* board;
 
@@ -33,15 +35,18 @@ struct ChessMove
 	// For example, en passent, promotion and castling.
 	virtual bool DoSpecialThing();
 
+	virtual ChessMove* clone();
+
 	ChessMove();
 	ChessMove(const Vector2i& destination, GameBoard* board, ChessPiece* piece);
 	~ChessMove() = default;
+
 };
 
 class ChessPiece
 {
 protected:
-	friend struct ChessMove;
+	friend class ChessMove;
 	friend bool LoadBoard(GameBoard& board, const std::string& fen);
 
 	// Pointer to the board this object is on.
@@ -53,11 +58,8 @@ protected:
 	// The team this object is on.
 	Team team;
 
-	// The last round allPossibleMoves is updated.
-	size_t lastUpdateRound;
-
 	// Every viable move this chess piece can make in the current round.
-	std::list<ChessMove> allPossibleMoves;
+	std::list<std::unique_ptr<ChessMove>> allPossibleMoves;
 
 	// True if this piece is moved. Important for pawns' first move and castling.
 	bool isMoved = false;
@@ -75,7 +77,7 @@ public:
 	ChessPiece(const Vector2i& position, const Team& team, GameBoard* board);
 
 	// This function gets every possible move the chess piece could make.
-	const std::list<ChessMove>& GetAllPossibleMoves();
+	std::list<std::unique_ptr<ChessMove>> GetAllPossibleMoves(bool includeInvalidMove = false);
 
 	// The team this object is on.
 	const Team& GetTeam() const;
@@ -94,8 +96,11 @@ public:
 		this->team = T;
 	}
 	
-	Vector2i getPosition() {
+	const Vector2i& GetPosition() const 
+	{
 		return position;
 	}
+
+
 };
 

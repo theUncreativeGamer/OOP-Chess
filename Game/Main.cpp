@@ -7,16 +7,47 @@
 #include "Queen.h"
 #include "King.h"
 #include "ViewManager.h"
+#include "GameManager.h"
 #include <iostream>
 
-const std::string defaultFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
 
 int main()
 {
-	GameBoard board;
-	board.AddPiece(Knight::type, { 0,0 }, Team::White);
-	board.RemovePiece({ 0,0 });
-	LoadBoard(board, defaultFEN);
-	ViewManager vm;
-	vm.showBoard_selectChess(board, Team::White);
+	GameManager gameManager;
+	std::string in = "";
+	std::string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+	while (true)
+	{
+		if (in == "")
+		{
+			std::cout << "是否使用FEN代碼？(y/n)" << std::endl;
+			std::getline(std::cin, in);
+		}
+		if (in.size() > 0 && (in[0] == 'y' || in[0] == 'Y'))
+		{
+			std::cout << "請輸入FEN代碼：" << std::endl;
+			std::getline(std::cin, fen);
+		}
+		
+		gameManager.Load(fen);
+		if (gameManager.State() != GameState::Ready)
+		{
+			std::cout << "您輸入的FEN代碼有誤，請再試一次。" << std::endl;
+			continue;
+		}
+
+		gameManager.Run();
+		std::cout << "是否要再進行一場遊戲？(y/n)" << std::endl;
+		std::getline(std::cin, in);
+		if (in.size() > 0 && (in[0] == 'y' || in[0] == 'Y'))
+		{
+			in = "";
+			continue;
+		}
+		else
+		{
+			break;
+		}
+	}
 }

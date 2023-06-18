@@ -1,7 +1,7 @@
 #include "King.h"
 #include "Rook.h"
 
-const Vector2i moveDirs[8] =
+const Vector2i King::moveDirs[8] =
 {
 	Vector2i(1,  1),
 	Vector2i(1,  0),
@@ -18,7 +18,7 @@ void King::GeneratePossibleMoves()
 	for (int i = 0; i < 8; i++)
 	{
 		Vector2i destination = position + moveDirs[i];
-		if (!board->PositionIsInBounds(destination)) continue;
+		if (!destination.InBounds()) continue;
 
 		ChessPiece* target = board->GetPiece(destination);
 		if (target == nullptr || target->GetTeam() != team)
@@ -30,28 +30,29 @@ void King::GeneratePossibleMoves()
 		return;
 	if (team == Team::White)
 	{
-		ChessPiece* wqr = board->GetPiece({ 0,7 });
+		ChessPiece* wqr = board->GetPiece({ 0,0 });
 		if (wqr != nullptr && wqr->GetTeam() == Team::White && wqr->GetType() == Rook::type)
 		{
-			allPossibleMoves.push_back(CastlingMove(Vector2i( 2,7 ), board, dynamic_cast<ChessPiece*>(this), *wqr, true));
+			allPossibleMoves.emplace_back(std::make_unique<CastlingMove>(CastlingMove(Vector2i(2, 0), board, dynamic_cast<ChessPiece*>(this), *wqr, true)));
+			//allPossibleMoves.back()->DoSpecialThing();
 		}
-		ChessPiece* wkr = board->GetPiece({ 7,7 });
+		ChessPiece* wkr = board->GetPiece({ 7,0 });
 		if (wkr != nullptr && wkr->GetTeam() == Team::White && wkr->GetType() == Rook::type)
 		{
-			allPossibleMoves.push_back(CastlingMove(Vector2i(6, 7), board, dynamic_cast<ChessPiece*>(this), *wkr, true));
+			allPossibleMoves.emplace_back(std::make_unique<CastlingMove>(CastlingMove(Vector2i(6, 0), board, dynamic_cast<ChessPiece*>(this), *wkr, true)));
 		}
 	}
 	else if (team == Team::Black)
 	{
-		ChessPiece* bqr = board->GetPiece({ 0,0 });
+		ChessPiece* bqr = board->GetPiece({ 0,7 });
 		if (bqr != nullptr && bqr->GetTeam() == Team::Black && bqr->GetType() == Rook::type)
 		{
-			allPossibleMoves.push_back(CastlingMove(Vector2i(2, 0), board, dynamic_cast<ChessPiece*>(this), *bqr, true));
+			allPossibleMoves.emplace_back(std::make_unique<CastlingMove>(CastlingMove(Vector2i(2, 7), board, dynamic_cast<ChessPiece*>(this), *bqr, true)));
 		}
-		ChessPiece* bkr = board->GetPiece({ 7,0 });
+		ChessPiece* bkr = board->GetPiece({ 7,7 });
 		if (bkr != nullptr && bkr->GetTeam() == Team::Black && bkr->GetType() == Rook::type)
 		{
-			allPossibleMoves.push_back(CastlingMove(Vector2i(6, 0), board, dynamic_cast<ChessPiece*>(this), *bkr, true));
+			allPossibleMoves.emplace_back(std::make_unique<CastlingMove>(CastlingMove(Vector2i(6, 7), board, dynamic_cast<ChessPiece*>(this), *bkr, true)));
 		}
 	}
 }
@@ -84,11 +85,16 @@ bool CastlingMove::DoSpecialThing()
 {
 	if (isQueenSide)
 	{
-		targetRook.MoveTo({ destination.x + 1,destination.y });
+		targetRook.MoveTo({ destination.x - 1,destination.y });
 	}
 	else
 	{
 		targetRook.MoveTo({ destination.x - 1,destination.y });
 	}
 	return true;
+}
+
+CastlingMove* CastlingMove::clone()
+{
+	return new CastlingMove(destination, board, piece, targetRook, isQueenSide);
 }

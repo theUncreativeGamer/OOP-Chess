@@ -4,7 +4,7 @@ class King :
     public ChessPiece
 {
 protected:
-    const Vector2i moveDirs[8];
+    static const Vector2i moveDirs[8];
     void GeneratePossibleMoves();
 public:
     static const std::string type;
@@ -14,11 +14,13 @@ public:
     King* clone(GameBoard* anotherBoard) const override;
 };
 
-struct CastlingMove
-    : ChessMove
+class CastlingMove
+    : public ChessMove
 {
+public:
     ChessPiece& targetRook;
     bool isQueenSide;
     CastlingMove(const Vector2i& destination, GameBoard* board, ChessPiece* piece, ChessPiece& targetRook, const bool& isQueenSide);
-    bool DoSpecialThing();
+    bool DoSpecialThing() override;
+    CastlingMove* clone() override;
 };

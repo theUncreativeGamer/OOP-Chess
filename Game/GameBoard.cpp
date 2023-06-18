@@ -21,8 +21,8 @@ GameBoard::GameBoard(const size_t& width, const size_t& height)
 	//std::cout << "width is " << grid[0].size() << std::endl;
 }
 
-GameBoard::GameBoard(const GameBoard& another)
-	: width(another.width), height(another.height), currentRound(another.currentRound),
+GameBoard::GameBoard(const GameBoard& another, const bool& nextRound)
+	: width(another.width), height(another.height), currentRound(another.currentRound + nextRound?1:0),
 	currentPlayer(another.currentPlayer), halfmoveClock(another.halfmoveClock), eppp(another.eppp)
 {
 	for (const ChessPiece* p : another.pieces)
@@ -38,7 +38,7 @@ GameBoard::GameBoard(const GameBoard& another)
 
 	for (ChessPiece* p : pieces)
 	{
-		grid[p->getPosition().y][p->getPosition().x] = p;
+		grid[p->GetPosition().y][p->GetPosition().x] = p;
 	}
 }
 
@@ -86,6 +86,11 @@ const ChessPiece* GameBoard::GetPiece(Vector2i position) const
 	return grid[position.y][position.x];
 }
 
+const Team& GameBoard::GetCurrentPlayer() const
+{
+	return currentPlayer;
+}
+
 ChessPiece* GameBoard::AddPiece(const std::string& type, const Vector2i& position, const Team& team)
 {
 	if (GetPiece(position) != nullptr)
@@ -129,9 +134,9 @@ bool GameBoard::RemovePiece(const Vector2i& position)
 	if (GetPiece(position) == nullptr)
 		return false;
 	grid[position.y][position.x] = nullptr;
-	for (auto it = pieces.begin(); it != pieces.end(); it++)
+	for (std::list<ChessPiece*>::iterator it = pieces.begin(); it != pieces.end(); it++)
 	{
-		if ((*it)->getPosition() == position)
+		if ((*it)->GetPosition() == position)
 		{
 			delete (*it);
 			pieces.erase(it);
@@ -166,10 +171,10 @@ bool GameBoard::CheckCheckmate(const Team& kingTeam)
 		{
 			if (p->GetTeam() == opposingTeam)
 			{
-				const std::list<ChessMove>& moves = p->GetAllPossibleMoves();
-				for (const ChessMove& m : moves)
+				
+				for (const std::unique_ptr<ChessMove>& m : p->GetAllPossibleMoves(true))
 				{
-					if (m.destination == king->getPosition())return true;
+					if (m->destination == king->GetPosition())return true;
 				}
 			}
 		}
@@ -177,6 +182,23 @@ bool GameBoard::CheckCheckmate(const Team& kingTeam)
 	
 	return false;
 }
+
+void GameBoard::NextRound()
+{
+	currentRound++;
+	currentPlayer = currentPlayer == Team::Black ? Team::White : Team::Black;
+}
+
+bool GameBoard::CanMakeAMove()
+{
+	for (ChessPiece* p : pieces)
+	{
+		if (p->GetTeam() == currentPlayer && p->GetAllPossibleMoves().size() > 0)
+			return true;
+	}
+	return false;
+}
+
 
 
 

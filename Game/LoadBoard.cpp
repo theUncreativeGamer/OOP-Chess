@@ -40,7 +40,7 @@ bool LoadBoard(GameBoard& board, const std::string& fen)
 	int index = 0;
 
 	// 步驟1 將棋子放在對應的位置上
-	Vector2i nextPiecePosition(0, 0);
+	Vector2i nextPiecePosition(0, 7);
 	while (ReadNextCharacter(input,nextChar,index))
 	{
 		// 進入下一個步驟
@@ -52,7 +52,7 @@ bool LoadBoard(GameBoard& board, const std::string& fen)
 		// 切換到下一行
 		if (nextChar == '/')
 		{
-			nextPiecePosition.y += 1;
+			nextPiecePosition.y -= 1;
 			nextPiecePosition.x = 0;
 			continue;
 		}
@@ -65,7 +65,7 @@ bool LoadBoard(GameBoard& board, const std::string& fen)
 		}
 
 		// 格式錯誤
-		if (nextPiecePosition.x > 8 || nextPiecePosition.y > 8)
+		if (nextPiecePosition.x > 8 || nextPiecePosition.y < 0)
 		{
 			PrintErrorMessage(fen, index);
 			return false;

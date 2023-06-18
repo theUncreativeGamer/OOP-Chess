@@ -11,7 +11,7 @@ enum Team;
 class GameBoard
 {
 protected:
-	friend struct ChessMove;
+	friend class ChessMove;
 	friend bool LoadBoard(GameBoard& board, const std::string& fen);
 	friend class ChessPiece;
 
@@ -38,7 +38,7 @@ protected:
 	Team currentPlayer;
 public:
 	GameBoard(const size_t& width = 8, const size_t& height = 8);
-	GameBoard(const GameBoard& another);
+	GameBoard(const GameBoard& another, const bool& nextRound = false);
 	~GameBoard();
 	const size_t& GetWidth() const;
 	const size_t& GetHeight() const;
@@ -53,6 +53,8 @@ public:
 	// Get a read-only pointer to the chess piece on a specific tile in the grid.
 	const ChessPiece* GetPiece(Vector2i position) const;
 
+	const Team& GetCurrentPlayer() const;
+
 	// Attempt to create a certain type of chess piece on certain position.
 	// Returns the pointer to the created ChessPiece if success. Returns nullptr if fail.
 	// If there is already a piece on the certain position, this function will fail.
@@ -64,6 +66,11 @@ public:
 
 	bool CheckCheckmate(const Team& kingTeam);
 
-	GameBoard() = default;
+	void NextRound();
+
+	// Return true if current player can make a move.
+	// Useful to determine whether to end the game.
+	bool CanMakeAMove();
+
 };
 
