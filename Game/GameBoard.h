@@ -33,7 +33,7 @@ protected:
 
 	// How many moves both players have made since the last pawn advance or piece capture.
 	// Important for determining of draw.
-	size_t halfmoveClock = 0;
+	int halfmoveClock = 0;
 
 	Team currentPlayer;
 public:

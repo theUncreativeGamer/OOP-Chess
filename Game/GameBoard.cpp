@@ -186,11 +186,13 @@ bool GameBoard::CheckCheckmate(const Team& kingTeam)
 void GameBoard::NextRound()
 {
 	currentRound++;
+	halfmoveClock++;
 	currentPlayer = currentPlayer == Team::Black ? Team::White : Team::Black;
 }
 
 bool GameBoard::CanMakeAMove()
 {
+	if (halfmoveClock >= 20)return false;
 	for (ChessPiece* p : pieces)
 	{
 		if (p->GetTeam() == currentPlayer && p->GetAllPossibleMoves().size() > 0)

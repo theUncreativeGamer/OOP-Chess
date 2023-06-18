@@ -78,7 +78,11 @@ void ChessMove::MoveThePiece()
 {
 	board->eppp = { -1,-1 };
 	piece->isMoved = true;
-	board->RemovePiece(destination);
+	if (board->GetPiece(destination) != nullptr)
+	{
+		board->halfmoveClock = -1;
+		board->RemovePiece(destination);
+	}
 	piece->MoveTo(destination);
 }
 
