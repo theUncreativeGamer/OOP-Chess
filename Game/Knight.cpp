@@ -16,13 +16,13 @@ void Knight::GeneratePossibleMoves()
 {
 	for (int i = 0; i < 8; i++)
 	{
-		Vector2i destination = position + moveDirs[i];
-		if (!board->PositionIsInBounds(destination)) continue;
+		Vector2i moveDestination = position + moveDirs[i];
+		if (!board->PositionIsInBounds(moveDestination)) continue;
 
-		ChessPiece* target = board->GetPiece(destination);
+		ChessPiece* target = board->GetPiece(moveDestination);
 		if (target == nullptr || target->GetTeam() != team)
 		{
-			AddCommonMove(destination);
+			AddCommonMove(moveDestination);
 		}
 	}
 }

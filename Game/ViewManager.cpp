@@ -122,7 +122,7 @@ std::string ViewManager::ShowSelectedPiece(const GameBoard& board, ChessPiece* p
 	std::set<Vector2i> destinations;
 	for (const std::unique_ptr<ChessMove>& stuff : piece->GetAllPossibleMoves())
 	{
-		destinations.insert(stuff->destination);
+		destinations.insert(stuff->moveDestination);
 	}
 
 	SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);

@@ -14,6 +14,7 @@ protected:
 	friend class ChessMove;
 	friend bool LoadBoard(GameBoard& board, const std::string& fen);
 	friend class ChessPiece;
+	friend class PawnMove;
 
 	size_t width;
 	size_t height;
@@ -54,6 +55,8 @@ public:
 	const ChessPiece* GetPiece(Vector2i position) const;
 
 	const Team& GetCurrentPlayer() const;
+
+	const Vector2i& GetEPPP() const;
 
 	// Attempt to create a certain type of chess piece on certain position.
 	// Returns the pointer to the created ChessPiece if success. Returns nullptr if fail.

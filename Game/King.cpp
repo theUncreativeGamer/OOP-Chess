@@ -17,13 +17,13 @@ void King::GeneratePossibleMoves()
 {
 	for (int i = 0; i < 8; i++)
 	{
-		Vector2i destination = position + moveDirs[i];
-		if (!destination.InBounds()) continue;
+		Vector2i moveDestination = position + moveDirs[i];
+		if (!moveDestination.InBounds()) continue;
 
-		ChessPiece* target = board->GetPiece(destination);
+		ChessPiece* target = board->GetPiece(moveDestination);
 		if (target == nullptr || target->GetTeam() != team)
 		{
-			AddCommonMove(destination);
+			AddCommonMove(moveDestination);
 		}
 	}
 	if (isMoved)
@@ -76,8 +76,8 @@ King* King::clone(GameBoard* anotherBoard) const
 	return result;
 }
 
-CastlingMove::CastlingMove(const Vector2i& destination, GameBoard* board, ChessPiece* piece, ChessPiece& targetRook, const bool& isQueenSide)
-	: ChessMove(destination, board, piece), targetRook(targetRook), isQueenSide(isQueenSide)
+CastlingMove::CastlingMove(const Vector2i& moveDestination, GameBoard* board, ChessPiece* piece, ChessPiece& targetRook, const bool& isQueenSide)
+	: ChessMove(moveDestination, board, piece), targetRook(targetRook), isQueenSide(isQueenSide)
 {
 }
 
@@ -85,16 +85,16 @@ bool CastlingMove::DoSpecialThing()
 {
 	if (isQueenSide)
 	{
-		targetRook.MoveTo({ destination.x - 1,destination.y });
+		targetRook.MoveTo({ moveDestination.x - 1,moveDestination.y });
 	}
 	else
 	{
-		targetRook.MoveTo({ destination.x - 1,destination.y });
+		targetRook.MoveTo({ moveDestination.x - 1,moveDestination.y });
 	}
 	return true;
 }
 
 CastlingMove* CastlingMove::clone()
 {
-	return new CastlingMove(destination, board, piece, targetRook, isQueenSide);
+	return new CastlingMove(moveDestination, board, piece, targetRook, isQueenSide);
 }

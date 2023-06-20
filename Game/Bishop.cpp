@@ -10,17 +10,17 @@ const Vector2i Bishop::moveDirs[4]=
 void Bishop::GeneratePossibleMoves() {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 1; j <= 7; j++) {
-			Vector2i destination = position + moveDirs[i] * j;
-			if (!board->PositionIsInBounds(destination)) break; // 出界
+			Vector2i moveDestination = position + moveDirs[i] * j;
+			if (!board->PositionIsInBounds(moveDestination)) break; // 出界
 
-			ChessPiece* target = board->GetPiece(destination);
+			ChessPiece* target = board->GetPiece(moveDestination);
 			if (target == nullptr) // 空格
 			{
-				AddCommonMove(destination);
+				AddCommonMove(moveDestination);
 			}
 			else if (target->GetTeam() != team) // 敵方棋子位置
 			{
-				AddCommonMove(destination);
+				AddCommonMove(moveDestination);
 				break;
 			}
 			else break; // 玩家棋子位置

@@ -7,48 +7,56 @@
 
 void Pawn::GeneratePossibleMoves()
 {
-	if (this->team == White) // 白方，向上走
+	Vector2i forward = team == White ? Vector2i(0, 1) : Vector2i(0, -1);
+
+	Vector2i moveDestination = position + forward;
+	if (board->PositionIsInBounds(moveDestination)) {
+		ChessPiece* target = board->GetPiece(moveDestination);
+		if (target == nullptr || target->GetTeam() != team)
+		{
+			allPossibleMoves.push_back(std::make_unique<PawnMove>(PawnMove(moveDestination, board, this, false)));
+		}
+	}
+	if (!isMoved) // 還沒動過，可走兩格
 	{
-		Vector2i destination = position + moveDirs[0];
-		if (board->PositionIsInBounds(destination)) {
-			ChessPiece* target = board->GetPiece(destination);
+		moveDestination = position + forward * 2;
+		if (board->PositionIsInBounds(moveDestination)) {
+			ChessPiece* target = board->GetPiece(moveDestination);
 			if (target == nullptr || target->GetTeam() != team)
 			{
-				allPossibleMoves.push_back(std::make_unique<ChessMove>(ChessMove(destination, board, this)));
-			}
-		}
-		if (!isMoved) // 還沒動過，可走兩格
-		{
-			destination = position + moveDirs[0] * 2;
-			if (board->PositionIsInBounds(destination)) {
-				ChessPiece* target = board->GetPiece(destination);
-				if (target == nullptr || target->GetTeam() != team)
-				{
-					allPossibleMoves.push_back(std::make_unique<ChessMove>(ChessMove(destination, board, this)));
-				}
+				allPossibleMoves.push_back(std::make_unique<PawnMove>(PawnMove(moveDestination, board, this, true)));
 			}
 		}
 	}
-	else // 黑方，向下走
+
+	Vector2i left = position + Vector2i(-1, 0), right = position + Vector2i(1, 0);
+	moveDestination = left + forward;
+
+	if (board->PositionIsInBounds(moveDestination))
 	{
-		Vector2i destination = position + moveDirs[1];
-		if (board->PositionIsInBounds(destination)) {
-			ChessPiece* target = board->GetPiece(destination);
-			if (target == nullptr || target->GetTeam() != team)
-			{
-				allPossibleMoves.push_back(std::make_unique<ChessMove>(ChessMove(destination, board, this)));
-			}
-		}
-		if (!isMoved) // 還沒動過，可走兩格
+		if (board->GetPiece(moveDestination) != nullptr && board->GetPiece(moveDestination)->GetTeam() != team)
 		{
-			destination = position + moveDirs[1] * 2;
-			if (board->PositionIsInBounds(destination)) {
-				ChessPiece* target = board->GetPiece(destination);
-				if (target == nullptr || target->GetTeam() != team)
-				{
-					allPossibleMoves.push_back(std::make_unique<ChessMove>(ChessMove(destination, board, this)));
-				}
-			}
+			allPossibleMoves.push_back(std::make_unique<PawnMove>(PawnMove(moveDestination, board, this, false)));
+		}
+
+		if (left == board->GetEPPP() && board->GetPiece(moveDestination) == nullptr)
+		{
+			allPossibleMoves.push_back(std::make_unique<EnPassentMove>(EnPassentMove(moveDestination, left, board, this)));
+		}
+	}
+	
+
+	moveDestination = right + forward;
+	if (board->PositionIsInBounds(moveDestination))
+	{
+		if (board->GetPiece(moveDestination) != nullptr && board->GetPiece(moveDestination)->GetTeam() != team)
+		{
+			allPossibleMoves.push_back(std::make_unique<PawnMove>(PawnMove(moveDestination, board, this, false)));
+		}
+
+		if (right == board->GetEPPP() && board->GetPiece(moveDestination) == nullptr)
+		{
+			allPossibleMoves.push_back(std::make_unique<EnPassentMove>(EnPassentMove(moveDestination, right, board, this)));
 		}
 	}
 }
@@ -95,4 +103,29 @@ Pawn* Pawn::clone(GameBoard* anotherBoard) const
 	return result;
 }
 
+EnPassentMove::EnPassentMove(const Vector2i& moveDestination, const Vector2i& attackTarget, GameBoard* board, ChessPiece* piece)
+	: PawnMove(moveDestination, board, piece, false)
+{
+	this->attackTarget = attackTarget;
+}
 
+EnPassentMove* EnPassentMove::clone()
+{
+	return new EnPassentMove(moveDestination, attackTarget, board, piece);
+}
+
+PawnMove::PawnMove(const Vector2i& moveDestination, GameBoard* board, ChessPiece* piece, const bool& isFirstMove)
+	: ChessMove(moveDestination, board, piece), isFirstMove(isFirstMove)
+{
+}
+
+bool PawnMove::DoSpecialThing()
+{
+	if (isFirstMove)board->eppp = moveDestination;
+	return true;
+}
+
+PawnMove* PawnMove::clone()
+{
+	return new PawnMove(moveDestination, board, piece, isFirstMove);
+}

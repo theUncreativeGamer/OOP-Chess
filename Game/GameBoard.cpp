@@ -91,6 +91,11 @@ const Team& GameBoard::GetCurrentPlayer() const
 	return currentPlayer;
 }
 
+const Vector2i& GameBoard::GetEPPP() const
+{
+	return eppp;
+}
+
 ChessPiece* GameBoard::AddPiece(const std::string& type, const Vector2i& position, const Team& team)
 {
 	if (GetPiece(position) != nullptr)
@@ -174,7 +179,7 @@ bool GameBoard::CheckCheckmate(const Team& kingTeam)
 				
 				for (const std::unique_ptr<ChessMove>& m : p->GetAllPossibleMoves(true))
 				{
-					if (m->destination == king->GetPosition())return true;
+					if (m->moveDestination == king->GetPosition())return true;
 				}
 			}
 		}

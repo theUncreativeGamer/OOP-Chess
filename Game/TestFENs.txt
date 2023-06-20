@@ -6,3 +6,6 @@ rnbqkbnr/8/8/8/8/8/8/RNBQKBNR w KQkq - 0 1
 
 Castling:
 r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1
+
+En Passent:
+rnbqkbnr/pp1ppppp/8/1Pp5/8/8/P1PPPPPP/RNBQKBNR w KQkq c6 0 1

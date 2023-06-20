@@ -20,7 +20,7 @@ class CastlingMove
 public:
     ChessPiece& targetRook;
     bool isQueenSide;
-    CastlingMove(const Vector2i& destination, GameBoard* board, ChessPiece* piece, ChessPiece& targetRook, const bool& isQueenSide);
+    CastlingMove(const Vector2i& moveDestination, GameBoard* board, ChessPiece* piece, ChessPiece& targetRook, const bool& isQueenSide);
     bool DoSpecialThing() override;
     CastlingMove* clone() override;
 };

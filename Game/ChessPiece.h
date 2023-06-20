@@ -26,9 +26,12 @@ public:
 	ChessPiece* piece;
 
 	// The absolute coordinate of the destination the chess piece is moving into.
-	Vector2i destination;
+	Vector2i moveDestination;
 
-	// This makes piece move to destination.
+	// The absolute coordinate of the target piece that is going to be removed.
+	Vector2i attackTarget;
+
+	// This makes piece move to moveDestination.
 	void MoveThePiece();
 
 	// Please override this function if the chess piece does something special after moving.
@@ -38,8 +41,8 @@ public:
 	virtual ChessMove* clone();
 
 	ChessMove();
-	ChessMove(const Vector2i& destination, GameBoard* board, ChessPiece* piece);
-	~ChessMove() = default;
+	ChessMove(const Vector2i& moveDestination, GameBoard* board, ChessPiece* piece);
+	~ChessMove();
 
 };
 
@@ -71,7 +74,7 @@ protected:
 	// This function removes any move that will make its own king get checkmated.
 	void RemoveInvalidMoves();
 
-	void AddCommonMove(const Vector2i& destination);
+	void AddCommonMove(const Vector2i& moveDestination);
 public:
 	ChessPiece();
 	ChessPiece(const Vector2i& position, const Team& team, GameBoard* board);

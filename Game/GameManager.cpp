@@ -106,8 +106,8 @@ bool GameManager::RoundRoutine()
 
 	// ShowSelectedPiece
 	str = view.ShowSelectedPiece(board, selected);
-	Vector2i destination = StringToCoordinate(str);
-	if (!destination.InBounds())
+	Vector2i moveDestination = StringToCoordinate(str);
+	if (!moveDestination.InBounds())
 	{
 		output << "輸入錯誤！請重試" << std::endl;
 		system("pause");
@@ -116,7 +116,7 @@ bool GameManager::RoundRoutine()
 
 	std::unique_ptr<ChessMove> move = nullptr;
 	for (std::unique_ptr<ChessMove>& m : selected->GetAllPossibleMoves())
-		if (m->destination == destination)
+		if (m->moveDestination == moveDestination)
 		{
 			move = std::move(m);
 		}

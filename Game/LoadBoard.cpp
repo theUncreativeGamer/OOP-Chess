@@ -71,12 +71,14 @@ bool LoadBoard(GameBoard& board, const std::string& fen)
 			return false;
 		}
 
+		ChessPiece* tempPiece;
 		// 生成棋子
 		switch (nextChar)
 		{
 		case 'P':
 			// 白色 小兵
-			board.AddPiece(Pawn::type, nextPiecePosition, Team::White);
+			tempPiece = board.AddPiece(Pawn::type, nextPiecePosition, Team::White);
+			if (nextPiecePosition.y != 1)tempPiece->isMoved = true;
 			break;
 		case 'R':
 			// 白色 城堡
@@ -100,7 +102,8 @@ bool LoadBoard(GameBoard& board, const std::string& fen)
 			break;
 		case 'p':
 			// 黑色 小兵
-			board.AddPiece(Pawn::type, nextPiecePosition, Team::Black);
+			tempPiece = board.AddPiece(Pawn::type, nextPiecePosition, Team::Black);
+			if (nextPiecePosition.y != 6)tempPiece->isMoved = true;
 			break;
 		case 'r':
 			// 黑色 城堡
