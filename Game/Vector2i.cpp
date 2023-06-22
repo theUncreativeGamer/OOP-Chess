@@ -81,3 +81,9 @@ Vector2i operator*(const Vector2i& vec, const int num)
 	newVec.y *= num;
 	return newVec;
 }
+
+Vector2i StringToCoordinate(const std::string& str)
+{
+	if (str.size() < 2) return Vector2i(-1, -1);
+	return Vector2i(str[0] - 'a', str[1] - '1');
+}

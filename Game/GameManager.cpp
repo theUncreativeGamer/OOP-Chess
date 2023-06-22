@@ -23,24 +23,7 @@ bool GameManager::Run()
 	{
 		RoundRoutine();
 	}
-	if (state != GameState::Finished)
-	{
-		logger << "遊戲已被中止" << std::endl;
-		return false;
-	}
-
-	if (winningTeam == Team::Black)
-	{
-		logger << "黑方獲勝" << std::endl;
-	}
-	else if (winningTeam == Team::White)
-	{
-		logger << "白方獲勝" << std::endl;
-	}
-	else
-	{
-		logger << "無人獲勝" << std::endl;
-	}
+	ViewManager::instance->ShowEndScreen(winningTeam, !(state == GameState::Finished));
 	state = GameState::Preparing;
 	return true;
 }
@@ -48,13 +31,6 @@ bool GameManager::Run()
 const GameState& GameManager::State()
 {
 	return state;
-}
-
-
-Vector2i GameManager::StringToCoordinate(const std::string& str)
-{
-	if (str.size() < 2) return Vector2i(-1, -1);
-	return Vector2i(str[0] - 'a', str[1] - '1');
 }
 
 bool GameManager::RoundRoutine()
@@ -65,7 +41,6 @@ bool GameManager::RoundRoutine()
 
 	if (!board.CanMakeAMove())
 	{
-		logger << "沒有合法的行動！" << std::endl;
 		if (checkMate)
 		{
 			winningTeam = board.GetCurrentPlayer() == Team::Black ? Team::White : Team::Black;
@@ -79,15 +54,13 @@ bool GameManager::RoundRoutine()
 		return true;
 	}
 
-	logger << "認輸請輸入\"resign\"" << std::endl << "跳出此局遊戲請輸入\"exit\"" << std::endl;
-	std::string str;
-	std::getline(input, str);
+	std::string str = ViewManager::instance->GetNormalInput();
 
 	if (str == "resign")
 	{
 		logger << ((board.GetCurrentPlayer() == Team::Black) ? "黑方" : "白方") << "已投降\n";
 		winningTeam = board.GetCurrentPlayer() == Team::Black ? Team::White : Team::Black;
-		state = GameState::Finished;
+		state = GameState::Preparing;
 		return true;
 	}
 	else if (str == "exit")

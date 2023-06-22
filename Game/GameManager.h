@@ -18,7 +18,6 @@ class GameManager
 {
 private:
 	GameBoard board;
-	std::istream& input = std::cin;
 	std::ostream& logger = std::cout;
 
 	GameState state = GameState::Preparing;
@@ -27,8 +26,6 @@ private:
 	static const std::string defaultFEN;
 
 	bool RoundRoutine();
-
-	Vector2i StringToCoordinate(const std::string& str);
 public:
 	GameManager();
 

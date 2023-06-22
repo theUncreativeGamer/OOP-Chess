@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 struct Vector2i
 {
 	int x;
@@ -26,6 +27,8 @@ struct Vector2i
 	friend Vector2i operator*(const int& num, const Vector2i vec);
 	friend Vector2i operator*(const Vector2i& vec, const int num);
 
-
+	
 };
 
+// Convert a coordinate in the form of alphabet + number into a Vector2i.
+Vector2i StringToCoordinate(const std::string& str);

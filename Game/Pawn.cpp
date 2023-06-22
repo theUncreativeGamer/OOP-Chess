@@ -4,6 +4,7 @@
 #include "Rook.h"
 #include "Knight.h"
 #include "Bishop.h"
+#include "ViewManager.h"
 
 void Pawn::GeneratePossibleMoves()
 {
