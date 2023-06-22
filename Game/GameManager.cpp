@@ -60,7 +60,7 @@ bool GameManager::RoundRoutine()
 {
 	// ShowBoard
 	bool checkMate = board.CheckCheckmate(board.GetCurrentPlayer());
-	view.ShowBoard(board, checkMate);
+	view->ShowBoard(board, checkMate);
 
 	if (!board.CanMakeAMove())
 	{
@@ -105,7 +105,7 @@ bool GameManager::RoundRoutine()
 	}
 
 	// ShowSelectedPiece
-	str = view.ShowSelectedPiece(board, selected);
+	str = view->ShowSelectedPiece(board, selected);
 	Vector2i moveDestination = StringToCoordinate(str);
 	if (!moveDestination.InBounds())
 	{
@@ -138,6 +138,6 @@ bool GameManager::RoundRoutine()
 }
 
 GameManager::GameManager()
-	: board(), view()
+	: board(), view(std::make_unique<ConsoleView>())
 {
 }

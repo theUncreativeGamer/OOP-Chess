@@ -3,14 +3,14 @@
 #include "ChessPiece.h"
 #include <set>
 
-void ViewManager::SetColor(int color)
+void ConsoleView::SetColor(int color)
 {
 	HANDLE hConsole;
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, color);
 }
 
-void ViewManager::ShowBoard(const GameBoard& board, bool check)
+void ConsoleView::ShowBoard(const GameBoard& board, bool check)
 {
 	system("cls");
 	SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
@@ -69,7 +69,7 @@ void ViewManager::ShowBoard(const GameBoard& board, bool check)
 }
 
 
-std::string ViewManager::ShowSelectedPiece(const GameBoard& board, ChessPiece* piece)
+std::string ConsoleView::ShowSelectedPiece(const GameBoard& board, ChessPiece* piece)
 {
 	system("cls");
 	SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
@@ -146,5 +146,66 @@ std::string ViewManager::ShowSelectedPiece(const GameBoard& board, ChessPiece* p
 	std::getline(input, result);
 	return result;
 }
+
+void ConsoleView::ShowPromoteBoard(const GameBoard& board, ChessPiece* piece)
+{
+	system("cls");
+	SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+	output << "第" << board.GetCurrentRound() << "回合\n";
+
+	const Team& current_player = board.GetCurrentPlayer();
+	if (current_player == Team::White) {
+		output << "白方回合\n";
+	}
+	else if (current_player == Team::Black) {
+		output << "黑方回合\n";
+	}
+	else {
+		output << std::endl;
+	}
+
+	SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+	output << "\\ x a b c d e f g h \n";
+	output << "y   _ _ _ _ _ _ _ _ \n";
+	for (int i = 7; i >= 0; i--) {
+		SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+		output << i + 1 << "|  ";
+		for (int j = 0; j < 8; j++) {
+			const ChessPiece* chess = board.GetPiece(Vector2i(j, i));
+			int foregroundColor = FOREGROUND_RED;
+			int backgroundColor = (i + j) % 2 == 1 ? (BACKGROUND_RED | BACKGROUND_GREEN) : BACKGROUND_INTENSITY;
+			std::string str;
+
+			if (chess == nullptr)
+			{
+				str = "  ";
+			}
+			else
+			{
+				str = chess->GetType();
+				if (chess->GetTeam() == Team::White)
+				{
+					foregroundColor = FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN;
+				}
+				else
+				{
+					foregroundColor = 0;
+				}
+			}
+
+			if (Vector2i(j, i) == piece->GetPosition())
+			{
+				backgroundColor = BACKGROUND_GREEN | BACKGROUND_BLUE;
+			}
+
+			SetColor(foregroundColor | backgroundColor);
+			output << str;
+
+		}
+		output << std::endl;
+	}
+}
+
+
 
 

@@ -18,7 +18,7 @@ class GameManager
 {
 private:
 	GameBoard board;
-	ViewManager view;
+	std::unique_ptr<ViewManager> view;
 	std::istream& input = std::cin;
 	std::ostream& output = std::cout;
 

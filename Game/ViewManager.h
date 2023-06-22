@@ -7,15 +7,27 @@ class GameBoard;
 class ChessPiece;
 enum Team;
 
-
 class ViewManager {
+public:
+	//顯示棋盤
+	virtual void ShowBoard(const GameBoard& board, bool check = false) = 0;
+	//顯示一個棋子的可移動範圍
+	virtual std::string ShowSelectedPiece(const GameBoard& board, ChessPiece* piece) = 0;
+	//Promote時顯示的畫面
+	virtual void ShowPromoteBoard(const GameBoard& board, ChessPiece* piece) = 0;
+
+};
+
+class ConsoleView 
+	: public ViewManager
+{
 public:
 	//顯示棋盤
 	void ShowBoard(const GameBoard& board, bool check = false);
 	//顯示一個棋子的可移動範圍
 	std::string ShowSelectedPiece(const GameBoard& board, ChessPiece* piece);
 	//Promote時顯示的畫面
-	void showPromoteBoard(const std::vector<ChessPiece*>& chess, int target);
+	void ShowPromoteBoard(const GameBoard& board, ChessPiece* piece);
 
 private:
 	std::ostream& output = std::cout;
