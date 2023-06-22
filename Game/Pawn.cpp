@@ -123,6 +123,13 @@ PawnMove::PawnMove(const Vector2i& moveDestination, GameBoard* board, ChessPiece
 bool PawnMove::DoSpecialThing()
 {
 	if (isFirstMove)board->eppp = moveDestination;
+	if (moveDestination.y == 0 || moveDestination.y == board->GetHeight() - 1)
+	{
+		std::string type = ViewManager::instance->ShowPromoteBoard(*board, piece);
+		Team team = piece->GetTeam();
+		board->RemovePiece(moveDestination);
+		board->AddPiece(type, moveDestination, team);
+	}
 	return true;
 }
 

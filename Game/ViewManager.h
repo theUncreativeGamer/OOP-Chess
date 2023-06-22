@@ -45,7 +45,7 @@ private:
 
 	//³]©w¿é¥XÃC¦â 111¥Õ¦r¶À©³ 143¥Õ¦r¦Ç©³ 96¶Â¦r¶À©³ 128¶Â¦r¦Ç©³ 192¶Â¦r¬õ©³ 207¥Õ¦r¬õ©³ 236¬õ¦r¶À©³
 	// 7 ¥Õ¦r¶Â©³
-	void SetColor(int color);
+	void SetColor(int color = FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
 };
 
 

@@ -1,6 +1,10 @@
 #include "ViewManager.h"
 #include "GameBoard.h"
 #include "ChessPiece.h"
+#include "Queen.h"
+#include "Knight.h"
+#include "Bishop.h"
+#include "Rook.h"
 #include <set>
 
 std::unique_ptr<ViewManager> ViewManager::instance = nullptr;
@@ -15,7 +19,7 @@ void ConsoleView::SetColor(int color)
 void ConsoleView::ShowBoard(const GameBoard& board, bool check)
 {
 	system("cls");
-	SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+	SetColor();
 
 	const Team& current_player = board.GetCurrentPlayer();
 	std::cout << "第" << board.GetCurrentRound() << "回合" << std::endl;
@@ -33,7 +37,7 @@ void ConsoleView::ShowBoard(const GameBoard& board, bool check)
 	output << "\\ x a b c d e f g h \n";
 	output << "y   _ _ _ _ _ _ _ _ \n";
 	for (int i = 7; i >= 0; i--) {
-		SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+		SetColor();
 		output << i + 1 << "|  ";
 		for (int j = 0; j < 8; j++) {
 			const ChessPiece* chess = board.GetPiece(Vector2i(j, i));
@@ -64,7 +68,7 @@ void ConsoleView::ShowBoard(const GameBoard& board, bool check)
 		output << std::endl;
 	}
 
-	SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+	SetColor();
 	if (check != 0) {
 		output << "你被將軍了!!\n";
 	}
@@ -72,6 +76,7 @@ void ConsoleView::ShowBoard(const GameBoard& board, bool check)
 
 std::string ConsoleView::GetNormalInput()
 {
+	SetColor();
 	output << "認輸請輸入\"resign\"" << std::endl << "跳出此局遊戲請輸入\"exit\"" << std::endl;
 	std::string str;
 	std::getline(input, str);
@@ -82,7 +87,7 @@ std::string ConsoleView::GetNormalInput()
 std::string ConsoleView::ShowSelectedPiece(const GameBoard& board, ChessPiece* piece)
 {
 	system("cls");
-	SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+	SetColor();
 	output << "第" << board.GetCurrentRound() << "回合\n";
 
 	const Team& current_player = board.GetCurrentPlayer();
@@ -103,11 +108,11 @@ std::string ConsoleView::ShowSelectedPiece(const GameBoard& board, ChessPiece* p
 		destinations.insert(stuff->moveDestination);
 	}
 
-	SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+	SetColor();
 	output << "\\ x a b c d e f g h \n";
 	output << "y   _ _ _ _ _ _ _ _ \n";
 	for (int i = 7; i >= 0; i--) {
-		SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+		SetColor();
 		output << i + 1 << "|  ";
 		for (int j = 0; j < 8; j++) {
 			const ChessPiece* chess = board.GetPiece(Vector2i(j, i));
@@ -149,7 +154,7 @@ std::string ConsoleView::ShowSelectedPiece(const GameBoard& board, ChessPiece* p
 	}
 
 
-	SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+	SetColor();
 	output << "請選擇您要將棋子移動到的位置：\n";
 
 	std::string result;
@@ -160,7 +165,7 @@ std::string ConsoleView::ShowSelectedPiece(const GameBoard& board, ChessPiece* p
 std::string ConsoleView::ShowPromoteBoard(const GameBoard& board, ChessPiece* piece)
 {
 	system("cls");
-	SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+	SetColor();
 	output << "第" << board.GetCurrentRound() << "回合\n";
 
 	const Team& current_player = board.GetCurrentPlayer();
@@ -174,11 +179,11 @@ std::string ConsoleView::ShowPromoteBoard(const GameBoard& board, ChessPiece* pi
 		output << std::endl;
 	}
 
-	SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+	SetColor();
 	output << "\\ x a b c d e f g h \n";
 	output << "y   _ _ _ _ _ _ _ _ \n";
 	for (int i = 7; i >= 0; i--) {
-		SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+		SetColor();
 		output << i + 1 << "|  ";
 		for (int j = 0; j < 8; j++) {
 			const ChessPiece* chess = board.GetPiece(Vector2i(j, i));
@@ -215,16 +220,41 @@ std::string ConsoleView::ShowPromoteBoard(const GameBoard& board, ChessPiece* pi
 		output << std::endl;
 	}
 
+	SetColor();
 	output << "達陣！！您的小兵將要晉升為更強大的棋子。" << std::endl;
-	output << "請選擇您要讓此小兵晉升而成的目標：" << std::endl;
-	output << "Q: 皇后" << std::endl;
-	output << "N: 騎士" << std::endl;
-	output << "B: 主教" << std::endl;
-	output << "R: 城堡" << std::endl;
+	while (true)
+	{
+		output << "請選擇您要讓此小兵晉升而成的目標：" << std::endl;
+		output << "1: 皇后" << std::endl;
+		output << "2: 騎士" << std::endl;
+		output << "3: 主教" << std::endl;
+		output << "4: 城堡" << std::endl;
 
-	std::string result;
-	std::getline(input, result);
-	return result;
+		std::string result;
+		std::getline(input, result);
+		if (result.size() == 0 || result[0] < '1' || result[0]>'4')
+		{
+			output << "輸入錯誤，請再試一次。" << std::endl;
+			continue;
+		}
+		else if (result[0] == '1')
+		{
+			return Queen::type;
+		}
+		else if (result[0] == '2')
+		{
+			return Knight::type;
+		}
+		else if (result[0] == '3')
+		{
+			return Bishop::type;
+		}
+		else if (result[0] == '4')
+		{
+			return Rook::type;
+		}
+	}
+	
 }
 
 void ConsoleView::ShowEndScreen(const Team& winner, const bool& isStopped)
