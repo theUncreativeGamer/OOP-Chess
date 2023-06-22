@@ -10,8 +10,6 @@ enum Team;
 
 class ViewManager {
 public:
-	int MainMenu();
-	int GameMenu();
 	//顯示棋盤
 	void ShowBoard(const GameBoard& board, bool check = false);
 	//顯示一個棋子的可移動範圍

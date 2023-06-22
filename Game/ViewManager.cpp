@@ -3,38 +3,6 @@
 #include "ChessPiece.h"
 #include <set>
 
-int ViewManager::MainMenu() {
-	system("cls");
-	int choice = 0;
-	output << "選擇模式\n"
-		<< "1:玩家對玩家\n"
-		<< "2:離開遊戲\n";
-	input >> choice;
-	while (choice < 1 || choice > 3) {
-		system("cls");
-		output << "錯誤選項\n";
-		system("pause");
-		system("cls");
-		output << "選擇模式\n"
-			<< "1:玩家對玩家\n"
-			<< "2:離開遊戲\n";
-		input >> choice;
-	}
-	return choice;
-}
-
-
-int ViewManager::GameMenu() {
-	system("cls");
-	output << "請問要進行新遊戲或是載入遊戲紀錄?\n"
-		<< "1: 新遊戲\n"
-		<< "2: 載入FEN代碼\n";
-
-	int option;
-	input >> option;
-	return option;
-}
-
 void ViewManager::SetColor(int color)
 {
 	HANDLE hConsole;
