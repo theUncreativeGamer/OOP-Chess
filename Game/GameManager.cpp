@@ -25,23 +25,24 @@ bool GameManager::Run()
 	}
 	if (state != GameState::Finished)
 	{
-		output << "遊戲已被中止" << std::endl;
+		logger << "遊戲已被中止" << std::endl;
 		return false;
 	}
 
 	if (winningTeam == Team::Black)
 	{
-		output << "黑方獲勝" << std::endl;
+		logger << "黑方獲勝" << std::endl;
 	}
 	else if (winningTeam == Team::White)
 	{
-		output << "白方獲勝" << std::endl;
+		logger << "白方獲勝" << std::endl;
 	}
 	else
 	{
-		output << "無人獲勝" << std::endl;
+		logger << "無人獲勝" << std::endl;
 	}
 	state = GameState::Preparing;
+	return true;
 }
 
 const GameState& GameManager::State()
@@ -60,11 +61,11 @@ bool GameManager::RoundRoutine()
 {
 	// ShowBoard
 	bool checkMate = board.CheckCheckmate(board.GetCurrentPlayer());
-	view->ShowBoard(board, checkMate);
+	ViewManager::instance->ShowBoard(board, checkMate);
 
 	if (!board.CanMakeAMove())
 	{
-		output << "沒有合法的行動！" << std::endl;
+		logger << "沒有合法的行動！" << std::endl;
 		if (checkMate)
 		{
 			winningTeam = board.GetCurrentPlayer() == Team::Black ? Team::White : Team::Black;
@@ -78,13 +79,13 @@ bool GameManager::RoundRoutine()
 		return true;
 	}
 
-	output << "認輸請輸入\"resign\"" << std::endl << "跳出此局遊戲請輸入\"exit\"" << std::endl;
+	logger << "認輸請輸入\"resign\"" << std::endl << "跳出此局遊戲請輸入\"exit\"" << std::endl;
 	std::string str;
 	std::getline(input, str);
 
 	if (str == "resign")
 	{
-		output << ((board.GetCurrentPlayer() == Team::Black) ? "黑方" : "白方") << "已投降\n";
+		logger << ((board.GetCurrentPlayer() == Team::Black) ? "黑方" : "白方") << "已投降\n";
 		winningTeam = board.GetCurrentPlayer() == Team::Black ? Team::White : Team::Black;
 		state = GameState::Finished;
 		return true;
@@ -99,17 +100,17 @@ bool GameManager::RoundRoutine()
 	ChessPiece* selected = board.GetPiece(StringToCoordinate(str));
 	if (selected == nullptr || selected->GetTeam() != board.GetCurrentPlayer())
 	{
-		output << "輸入錯誤！請重試" << std::endl;
+		logger << "輸入錯誤！請重試" << std::endl;
 		system("pause");
 		return false;
 	}
 
 	// ShowSelectedPiece
-	str = view->ShowSelectedPiece(board, selected);
+	str = ViewManager::instance->ShowSelectedPiece(board, selected);
 	Vector2i moveDestination = StringToCoordinate(str);
 	if (!moveDestination.InBounds())
 	{
-		output << "輸入錯誤！請重試" << std::endl;
+		logger << "輸入錯誤！請重試" << std::endl;
 		system("pause");
 		return false;
 	}
@@ -124,7 +125,7 @@ bool GameManager::RoundRoutine()
 
 	if (move == nullptr)
 	{
-		output << "輸入錯誤！請重試" << std::endl;
+		logger << "輸入錯誤！請重試" << std::endl;
 		system("pause");
 		return false;
 	}
@@ -138,6 +139,6 @@ bool GameManager::RoundRoutine()
 }
 
 GameManager::GameManager()
-	: board(), view(std::make_unique<ConsoleView>())
+	: board()
 {
 }

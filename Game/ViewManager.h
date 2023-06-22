@@ -9,6 +9,8 @@ enum Team;
 
 class ViewManager {
 public:
+	// 當前使用的ViewManager
+	static std::unique_ptr<ViewManager> instance;
 	//顯示棋盤
 	virtual void ShowBoard(const GameBoard& board, bool check = false) = 0;
 	//顯示一個棋子的可移動範圍
@@ -30,7 +32,7 @@ public:
 	void ShowPromoteBoard(const GameBoard& board, ChessPiece* piece);
 
 private:
-	std::ostream& output = std::cout;
+	std::ostream& logger = std::cout;
 	std::istream& input = std::cin;
 
 	//設定輸出顏色 111白字黃底 143白字灰底 96黑字黃底 128黑字灰底 192黑字紅底 207白字紅底 236紅字黃底

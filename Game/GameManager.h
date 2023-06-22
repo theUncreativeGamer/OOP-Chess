@@ -18,9 +18,8 @@ class GameManager
 {
 private:
 	GameBoard board;
-	std::unique_ptr<ViewManager> view;
 	std::istream& input = std::cin;
-	std::ostream& output = std::cout;
+	std::ostream& logger = std::cout;
 
 	GameState state = GameState::Preparing;
 	Team winningTeam = Team::Undefined;

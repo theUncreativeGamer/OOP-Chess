@@ -3,6 +3,8 @@
 #include "ChessPiece.h"
 #include <set>
 
+std::unique_ptr<ViewManager> ViewManager::instance = nullptr;
+
 void ConsoleView::SetColor(int color)
 {
 	HANDLE hConsole;
@@ -18,21 +20,21 @@ void ConsoleView::ShowBoard(const GameBoard& board, bool check)
 	const Team& current_player = board.GetCurrentPlayer();
 	std::cout << "第" << board.GetCurrentRound() << "回合" << std::endl;
 	if (current_player == Team::White) {
-		output << "白方回合\n";
+		logger << "白方回合\n";
 	}
 	else if (current_player == Team::Black) {
-		output << "黑方回合\n";
+		logger << "黑方回合\n";
 	}
 	else {
-		output << std::endl;
+		logger << std::endl;
 	}
 	
 
-	output << "\\ x a b c d e f g h \n";
-	output << "y   _ _ _ _ _ _ _ _ \n";
+	logger << "\\ x a b c d e f g h \n";
+	logger << "y   _ _ _ _ _ _ _ _ \n";
 	for (int i = 7; i >= 0; i--) {
 		SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
-		output << i+1 << "|  ";
+		logger << i+1 << "|  ";
 		for (int j = 0; j < 8; j++) {
 			const ChessPiece* chess = board.GetPiece(Vector2i(j, i));
 			int foregroundColor = FOREGROUND_RED;
@@ -57,14 +59,14 @@ void ConsoleView::ShowBoard(const GameBoard& board, bool check)
 			}
 			
 			SetColor(foregroundColor | backgroundColor);
-			output << str;
+			logger << str;
 		}
-		output << std::endl;
+		logger << std::endl;
 	}
 
 	SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
 	if (check != 0) {
-		output << "你被將軍了!!\n";
+		logger << "你被將軍了!!\n";
 	}
 }
 
@@ -73,17 +75,17 @@ std::string ConsoleView::ShowSelectedPiece(const GameBoard& board, ChessPiece* p
 {
 	system("cls");
 	SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
-	output << "第" << board.GetCurrentRound() << "回合\n";
+	logger << "第" << board.GetCurrentRound() << "回合\n";
 
 	const Team& current_player = board.GetCurrentPlayer();
 	if (current_player == Team::White) {
-		output << "白方回合\n";
+		logger << "白方回合\n";
 	}
 	else if (current_player == Team::Black) {
-		output << "黑方回合\n";
+		logger << "黑方回合\n";
 	}
 	else {
-		output << std::endl;
+		logger << std::endl;
 	}
 
 	Vector2i origin = piece->GetPosition();
@@ -94,11 +96,11 @@ std::string ConsoleView::ShowSelectedPiece(const GameBoard& board, ChessPiece* p
 	}
 
 	SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
-	output << "\\ x a b c d e f g h \n";
-	output << "y   _ _ _ _ _ _ _ _ \n";
+	logger << "\\ x a b c d e f g h \n";
+	logger << "y   _ _ _ _ _ _ _ _ \n";
 	for (int i = 7; i >= 0; i--) {
 		SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
-		output << i + 1 << "|  ";
+		logger << i + 1 << "|  ";
 		for (int j = 0; j < 8; j++) {
 			const ChessPiece* chess = board.GetPiece(Vector2i(j, i));
 			int foregroundColor = FOREGROUND_RED;
@@ -132,15 +134,15 @@ std::string ConsoleView::ShowSelectedPiece(const GameBoard& board, ChessPiece* p
 			}
 
 			SetColor(foregroundColor | backgroundColor);
-			output << str;
+			logger << str;
 
 		}
-		output << std::endl;
+		logger << std::endl;
 	}
 
 
 	SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
-	output << "請選擇您要將棋子移動到的位置：\n";
+	logger << "請選擇您要將棋子移動到的位置：\n";
 
 	std::string result;
 	std::getline(input, result);
@@ -151,25 +153,25 @@ void ConsoleView::ShowPromoteBoard(const GameBoard& board, ChessPiece* piece)
 {
 	system("cls");
 	SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
-	output << "第" << board.GetCurrentRound() << "回合\n";
+	logger << "第" << board.GetCurrentRound() << "回合\n";
 
 	const Team& current_player = board.GetCurrentPlayer();
 	if (current_player == Team::White) {
-		output << "白方回合\n";
+		logger << "白方回合\n";
 	}
 	else if (current_player == Team::Black) {
-		output << "黑方回合\n";
+		logger << "黑方回合\n";
 	}
 	else {
-		output << std::endl;
+		logger << std::endl;
 	}
 
 	SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
-	output << "\\ x a b c d e f g h \n";
-	output << "y   _ _ _ _ _ _ _ _ \n";
+	logger << "\\ x a b c d e f g h \n";
+	logger << "y   _ _ _ _ _ _ _ _ \n";
 	for (int i = 7; i >= 0; i--) {
 		SetColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
-		output << i + 1 << "|  ";
+		logger << i + 1 << "|  ";
 		for (int j = 0; j < 8; j++) {
 			const ChessPiece* chess = board.GetPiece(Vector2i(j, i));
 			int foregroundColor = FOREGROUND_RED;
@@ -199,10 +201,10 @@ void ConsoleView::ShowPromoteBoard(const GameBoard& board, ChessPiece* piece)
 			}
 
 			SetColor(foregroundColor | backgroundColor);
-			output << str;
+			logger << str;
 
 		}
-		output << std::endl;
+		logger << std::endl;
 	}
 }
 

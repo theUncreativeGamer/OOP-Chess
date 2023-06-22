@@ -14,6 +14,7 @@
 
 int main()
 {
+	ViewManager::instance = std::make_unique<ConsoleView>();
 	GameManager gameManager;
 	std::string in = "";
 	std::string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
