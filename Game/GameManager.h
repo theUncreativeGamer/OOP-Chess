@@ -23,6 +23,9 @@ private:
 	GameState state = GameState::Preparing;
 	Team winningTeam = Team::Undefined;
 
+	int startingRound;
+	std::vector<std::string> boardStates;
+
 	static const std::string defaultFEN;
 
 	bool RoundRoutine();

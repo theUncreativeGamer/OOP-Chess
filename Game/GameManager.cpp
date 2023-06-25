@@ -8,6 +8,9 @@ bool GameManager::Load(const std::string& fen)
 		return false;
 	if (LoadBoard(board, fen))
 	{
+		startingRound = board.GetCurrentRound();
+		boardStates.clear();
+		boardStates.push_back(SaveBoardAsFEN(board));
 		state = GameState::Ready;
 		return true;
 	}
@@ -35,6 +38,7 @@ const GameState& GameManager::State()
 
 bool GameManager::RoundRoutine()
 {
+
 	// ShowBoard
 	bool checkMate = board.CheckCheckmate(board.GetCurrentPlayer());
 	ViewManager::instance->ShowBoard(board, checkMate);
@@ -72,6 +76,30 @@ bool GameManager::RoundRoutine()
 	else if (str == "save")
 	{
 		ViewManager::instance->PrintFEN(board);
+		return true;
+	}
+	else if (str == "undo")
+	{
+		int lastRoundIndex = board.GetCurrentRound() - startingRound - 1;
+		if (lastRoundIndex < 0)
+		{
+			logger << "沒辦法再復原了..." << std::endl;
+			system("pause");
+			return false;
+		}
+		LoadBoard(board, boardStates[lastRoundIndex]);
+		return true;
+	}
+	else if (str == "redo")
+	{
+		int nextRoundIndex = board.GetCurrentRound() - startingRound + 1;
+		if (nextRoundIndex >= boardStates.size())
+		{
+			logger << "沒辦法再重做了..." << std::endl;
+			system("pause");
+			return false;
+		}
+		LoadBoard(board, boardStates[nextRoundIndex]);
 		return true;
 	}
 
@@ -112,11 +140,13 @@ bool GameManager::RoundRoutine()
 	move->MoveThePiece();
 	move->DoSpecialThing();
 	board.NextRound();
+	boardStates.erase(boardStates.begin() + (board.GetCurrentRound() - startingRound), boardStates.end());
+	boardStates.push_back(SaveBoardAsFEN(board));
 
 	return true;
 }
 
 GameManager::GameManager()
-	: board()
+	: board(), startingRound(1)
 {
 }

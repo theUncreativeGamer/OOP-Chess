@@ -77,9 +77,13 @@ void ConsoleView::ShowBoard(const GameBoard& board, bool check)
 std::string ConsoleView::GetNormalInput()
 {
 	SetColor();
-	output << "認輸請輸入\"resign\"" << std::endl;
-	output << "跳出此局遊戲請輸入\"exit\"" << std::endl;
-	output << "儲存當前遊戲請輸入\"save\"" << std::endl;
+	output << "請選擇棋子。" << std::endl;
+	output << "其他選項：" << std::endl;
+	output << "認輸     - resign" << std::endl;
+	output << "離開遊戲 - exit" << std::endl;
+	output << "儲存版面 - save" << std::endl;
+	output << "復原     - undo" << std::endl;
+	output << "重做     - redo" << std::endl;
 	std::string str;
 	std::getline(input, str);
 	return str;
