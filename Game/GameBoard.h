@@ -37,6 +37,9 @@ protected:
 	int halfmoveClock = 0;
 
 	Team currentPlayer;
+
+	// Remove every chess piece.
+	void Clear();
 public:
 	GameBoard(const size_t& width = 8, const size_t& height = 8);
 	GameBoard(const GameBoard& another, const bool& nextRound = false);

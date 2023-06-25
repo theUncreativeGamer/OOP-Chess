@@ -34,6 +34,8 @@ static inline void PrintErrorMessage(const std::string& fen, const int& index)
 // Load the board state form FEN code.
 bool LoadBoard(GameBoard& board, const std::string& fen)
 {
+	board.Clear();
+
 	std::stringstream input(fen);
 	input >> std::noskipws; // don't skip whitespace
 	char nextChar = '\0';

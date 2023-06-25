@@ -8,6 +8,23 @@
 #include "King.h"
 #include <iostream>
 
+void GameBoard::Clear()
+{
+	for (ChessPiece*& p : pieces)
+	{
+		delete p;
+	}
+	pieces.clear();
+
+	for (auto& row : grid)
+	{
+		for (ChessPiece*& p : row)
+		{
+			p = nullptr;
+		}
+	}
+}
+
 GameBoard::GameBoard(const size_t& width, const size_t& height)
 	: width(width), height(height), currentRound(1), eppp(-1,-1), currentPlayer(Team::White)
 {
