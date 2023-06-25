@@ -85,7 +85,7 @@ bool CastlingMove::DoSpecialThing()
 {
 	if (isQueenSide)
 	{
-		targetRook.MoveTo({ moveDestination.x - 1,moveDestination.y });
+		targetRook.MoveTo({ moveDestination.x + 1,moveDestination.y });
 	}
 	else
 	{
