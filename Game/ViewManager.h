@@ -21,7 +21,8 @@ public:
 	virtual std::string ShowPromoteBoard(const GameBoard& board, ChessPiece* piece) = 0;
 	// 遊戲結束的畫面
 	virtual void ShowEndScreen(const Team& winner, const bool& isStopped) = 0;
-
+	// 將FEN代碼顯示在螢幕上
+	virtual void PrintFEN(const GameBoard& board) = 0;
 };
 
 class ConsoleView 
@@ -38,6 +39,8 @@ public:
 	std::string ShowPromoteBoard(const GameBoard& board, ChessPiece* piece) override;
 	// 遊戲結束的畫面
 	void ShowEndScreen(const Team& winner, const bool& isStopped) override;
+	// 將FEN代碼顯示在螢幕上
+	void PrintFEN(const GameBoard& board) override;
 
 private:
 	std::ostream& output = std::cout;

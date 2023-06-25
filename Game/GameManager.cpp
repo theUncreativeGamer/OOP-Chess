@@ -69,6 +69,11 @@ bool GameManager::RoundRoutine()
 		state = GameState::Preparing;
 		return true;
 	}
+	else if (str == "save")
+	{
+		ViewManager::instance->PrintFEN(board);
+		return true;
+	}
 
 	ChessPiece* selected = board.GetPiece(StringToCoordinate(str));
 	if (selected == nullptr || selected->GetTeam() != board.GetCurrentPlayer())

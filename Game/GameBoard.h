@@ -13,6 +13,7 @@ class GameBoard
 protected:
 	friend class ChessMove;
 	friend bool LoadBoard(GameBoard& board, const std::string& fen);
+	friend std::string SaveBoardAsFEN(const GameBoard& board);
 	friend class ChessPiece;
 	friend class PawnMove;
 

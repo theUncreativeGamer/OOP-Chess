@@ -77,7 +77,9 @@ void ConsoleView::ShowBoard(const GameBoard& board, bool check)
 std::string ConsoleView::GetNormalInput()
 {
 	SetColor();
-	output << "認輸請輸入\"resign\"" << std::endl << "跳出此局遊戲請輸入\"exit\"" << std::endl;
+	output << "認輸請輸入\"resign\"" << std::endl;
+	output << "跳出此局遊戲請輸入\"exit\"" << std::endl;
+	output << "儲存當前遊戲請輸入\"save\"" << std::endl;
 	std::string str;
 	std::getline(input, str);
 	return str;
@@ -274,6 +276,13 @@ void ConsoleView::ShowEndScreen(const Team& winner, const bool& isStopped)
 	{
 		output << "無人獲勝" << std::endl;
 	}
+}
+
+void ConsoleView::PrintFEN(const GameBoard& board)
+{
+	output << "當前回合狀態的FEN代碼：" << std::endl;
+	output << SaveBoardAsFEN(board) << std::endl;
+	system("pause");
 }
 
 

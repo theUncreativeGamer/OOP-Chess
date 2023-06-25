@@ -51,6 +51,7 @@ class ChessPiece
 protected:
 	friend class ChessMove;
 	friend bool LoadBoard(GameBoard& board, const std::string& fen);
+	friend std::string SaveBoardAsFEN(const GameBoard& board);
 
 	// Pointer to the board this object is on.
 	GameBoard* board;
