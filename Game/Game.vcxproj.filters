@@ -91,6 +91,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="TestFENs.txt" />
+    <Text Include="..\TestFENs.txt" />
   </ItemGroup>
 </Project>
